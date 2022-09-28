@@ -1,0 +1,161 @@
+﻿<!-- eslint-disable vue/multi-word-component-names -->
+<template>
+  <div class="about-page">
+    <div class="little-keyVisual" ref="keyvisual">
+      <div class="curtain-white"></div>
+      <img src="@/assets/image/content/about.jpg" alt="">
+    </div>
+
+    <div class="content" ref="pinned">
+      <div class="container">
+        <div class="title">
+          <span>about</span><br>itwizard.
+        </div>
+
+
+        <div class="main">
+          <div class="txt">
+            <p class="txt-title">Мэдээлэл технологийн салбарыг тэргүүлнэ</p>
+            <p>Манай хамт олон нь 2016 оноос хойш үйл ажиллагаагаа явуулж байгаа бөгөөд бид Солонгосын зах зээл дээрх Мэдээлэл технологийн төслүүдийг гүйцэтгэж дотоодын зах зээлээс хараат бус ажилладаг болно. Энэ чиглэлээр олон жил ажилласан туршлагатай хамт олон бүрдүүлэн үйл ажиллагаа явуулж байгаа бөгөөд Мэдээлэл технологийн салбарт хөл тавьж буй залуу эрин үеийг дэмжин ажиллахдаа таатай байна. Бидний эрхэм зорилго дэлхий ертөнц хурдтай өөрчлөгдөж, цахим хувьсгал өрнөж буй энэ эрин үед технологид суурилсан амжилтын гол чиглүүлэгч түнш нь байх үнэтэй хариуцлагатай үйлсэд бид бүхий л хүч чадлаа зориулан залуу эрин үеийг дэмжин ажиллах болно.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="little-keyVisual-2">
+      <div class="curtain-blck"></div>
+        <div class="history-text">our history</div>
+        <img src="@/assets/image/content/itwizard_wall.jpg" alt="">
+      </div>
+
+      <div class="container">
+        <div class="timeline">
+        <div class="container-timeline left">
+          <div class="content-timeline">
+            <h2>2018</h2>
+            <p>OKtomato, morensoft, ilpanbiz etc... олон тооны компаниудтай хамтран IT outsourcing хийх гэрээ байгуулан амжилттай ажиллаж байна.</p>
+          </div>
+        </div>
+        <div class="container-timeline right">
+          <div class="content-timeline">
+            <h2>2019</h2>
+            <p>IT outsourcing салбар болон outsourcing SI хөгжүүлэлт хийж хүрээгээ тэлсэн.</p>
+          </div>
+        </div>
+        <div class="container-timeline left">
+          <div class="content-timeline">
+            <h2>2020</h2>
+            <p>Төрөл бүрийн шийдэл боловсруулах, засвар үйлчилгээний ажиллууд хийгээд байна.</p>
+          </div>
+        </div>
+        <div class="container-timeline right">
+          <div class="content-timeline">
+            <h2>2021</h2>
+            <p>Солонгос IT Outsourcing хөгжүүлэлт одоогоор (60 гаруй прожект дээр ажиллаад байна).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-us-container">
+      <div class="container">
+        <el-row :gutter="100">
+          <el-col :sm="24" :md="12">
+              <div class="contact-inner">
+                <div class="title">
+                  Хэрвээ бидэнтэй хамтарч<br>ажиллахыг хүсвэл.
+                </div>
+
+                <div class="description">
+                  Бид хөгжүүлэгч таны сайн хамтрагч,<br>дэмжигч байх болно.
+                </div>
+
+                <el-button type="primary" class="inputs" @click="$router.push('/career')">Нээлттэй ажлын байр</el-button>
+              </div>
+          </el-col>
+          <el-col :sm="24" :md="12">
+            <div class="contact-inner">
+              <img src="@/assets/image/map.png" alt="contact-us">
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+    </div>
+
+    <div class="container" style="padding-top: 100px;">
+      <div class="contact-title">
+        contact<br>us.
+      </div>
+      <el-row :gutter="100">
+        <el-col :sm="24" :md="12">
+          <div class="contact-me">
+            <el-collapse v-model="activeName" accordion>
+              <el-collapse-item title="Mongolia" name="1">
+                <div class="">
+                  <div class="address">
+                    Монгол улс, Улаанбаатар хот, Баянгол дүүрэг, 2-р хороо, 2-р хороолол,<br>Сөүлийн гудамж, 47/1 байр
+                  </div>
+                  <div class="phone">
+                    <span>PHONE</span> +976 7511-0023<p><a style="color: #000;" href="mailto:admin@itwizard.mn">admin@itwizard.mn</a></p>
+                  </div>
+                </div>
+              </el-collapse-item>
+              <el-collapse-item title="Republic of Korea" name="2">
+                <div class="">
+                  <div class="address">
+                    서울 금천구 가산디지털1로 5대륭테크노타운20차 402호
+                  </div>
+                  <div class="phone">
+                    <span>PHONE</span> +82 1644-5805
+                    <p><a style="color: #000;" href="mailto:admin@tagoplus.co.kr">admin@tagoplus.co.kr</a></p>
+                  </div>
+                </div>
+              </el-collapse-item>
+            </el-collapse>
+          </div>
+        </el-col>
+        <el-col :sm="24" :md="12">
+          <div class="contact-me" style="max-width: 70%;">
+            <el-input placeholder="Нэр" v-model="subscribe.name" clearable></el-input>
+            <el-input style="margin-top: 10px;" placeholder="Гарчиг" v-model="subscribe.title" clearable></el-input>
+            <el-input style="margin-top: 10px;" placeholder="Утас эсвэл Имэйл" v-model="subscribe.phone" clearable></el-input>
+            <el-input style="margin-top: 10px;" type="textarea" rows="3" placeholder="Дэлгэрэнгүй" v-model="subscribe.description" clearable></el-input>
+            <el-button type="primary">Мессеж илгээх</el-button>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      activeName: 1,
+      subscribe: {
+        name: '',
+        title: '',
+        phone: '',
+        description: ''
+      }
+    }
+  },
+  mounted() {
+    this.$srollTrigger.create({
+        trigger: this.$refs.keyvisual,
+        start: "top top",
+        pin: true,
+        pinSpacing: false
+      });
+
+    this.$srollTrigger.create({
+      trigger: this.$refs.pinned,
+      start: "top top",
+      pin: true,
+      pinSpacing: false,
+      end: 'bottom bottom'
+    });
+  }
+}
+</script>

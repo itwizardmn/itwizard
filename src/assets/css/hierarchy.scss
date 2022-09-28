@@ -1,0 +1,221 @@
+﻿$bottom-margin: 30px;
+$line-width: 2px;
+$line-color: rgba(#ababab, 1);
+$bg-color: #EFE6E2;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;600;700&display=swap');
+
+.hv-wrapper{
+  display: flex;
+  .hv-item{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    .hv-item-parent{
+      margin-bottom: $bottom-margin;
+      position: relative;
+      display: flex;
+      justify-content: center;      
+      &:after{
+        position: absolute;
+        content: '';
+        width: $line-width;
+        height: calc($bottom-margin / 10 * 8);
+        bottom: 0;
+        left: 50%;
+        background-color: $line-color;
+        transform: translateY(100%);
+      }
+    }
+
+    .hv-item-parent.x3{  
+      &:after{
+        height: calc($bottom-margin * 2);
+      }
+    }
+
+    .with-after {
+      &:before{
+        position: absolute;
+        content: '';
+        width: 100%;
+        background-color: $line-color;
+        height: $line-width;
+        bottom: 0;
+        left: 0%;
+        background-color: $line-color;
+        transform: translateY($bottom-margin / 10 * 8);
+      }
+    }
+
+    .with-after.x3 {
+      &:before{
+        width: 100% * 1.8;
+        height: $line-width;
+        transform: translate(-44%, $bottom-margin * 2);
+        z-index: 0;
+      }
+    }
+
+    .with-after.after-left {
+      &:before  {
+        left: 50%;
+      }
+    }
+    .with-after.after-right {
+      &:before  {
+        left: -50%;
+      }
+    }
+
+    .no-after {
+      &::after {
+        content: none;;
+      }
+    }
+
+    .hv-item-children{
+      display: flex;
+      justify-content: center;
+      .hv-item-child{
+        padding: 0 15px;
+        position: relative;
+        
+        &:before, &:after{
+          content: '';
+          position: absolute;
+          background-color: $line-color;
+          left: 0;
+        }
+        
+        &:before{
+          left: 50%;
+          top: 0;
+          transform: translateY(-100%);
+          width: $line-width;
+          height: $bottom-margin / 2;
+        }
+        
+        &:after{
+          top: -$bottom-margin / 2;
+          transform: translateY(-100%);
+          height: $line-width;
+          width: 100%;
+        }
+        
+        &:first-child:after{
+          left: 50%;
+          width: 50%;
+        }
+
+        &:last-child:after{
+          width: calc(50% + 1px);
+        }        
+        
+      }
+    }
+  }
+}
+
+
+.management-hierarchy{
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px 0;
+  position: relative;
+  h1{
+    text-align: center;
+    margin-bottom: 70px;
+  }
+
+  &>h1{
+      color: #FFF;
+  }
+
+  .hv-container{
+    // display: flex;
+    flex-grow: 1;
+    overflow: auto;
+    // align-items: center;
+    justify-content: center;
+  }
+
+  .person{
+      text-align: center;
+
+      .shape {
+        width: 150px;
+        height: 40px;
+        background-color: #063970;
+        font-size: 11px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      table {
+        border-collapse: collapse;
+        background-color: #cce7e8;
+        td {
+          border: 1px solid #c2c2c2;
+          padding: 10px;
+          text-align: left;
+        }
+      }
+      &>img{
+          height: 50px;
+          border: 5px solid #d6d6d6;
+          border-radius: 50%;
+          overflow: hidden;
+          background-color: #fff;
+      }
+
+      .groupText {
+        height: 50px;
+        width: 50px;
+        border: 5px solid #d6d6d6;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #00B0F0;
+        transform: translateX(50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      &>p.name{
+          font-family: 'Montserrat', sans-serif;
+          background-color: #fff;
+          padding: 5px 10px;
+          border-radius: 5px;
+          font-size: 12px;
+          font-weight: normal;
+          color: #3BAA9D;
+          margin: 0;
+          position: relative;
+          width: 100px;
+          white-space: nowrap;
+          overflow: hidden;
+
+          b {
+              color:rgba(#3BAA9D, 0.5);
+          }
+          &:before{
+              content: '';
+              position: absolute;
+              width: 2px;
+              height: 8px;
+              background-color: #fff;
+              left: 50%;
+              top: 0;
+              transform: translateY(-100%);
+          }
+      }
+  }
+}
