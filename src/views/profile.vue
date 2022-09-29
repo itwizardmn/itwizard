@@ -1014,6 +1014,7 @@ export default {
         this.user.phone = this.userInfo.main.phone;
         this.user.email = this.userInfo.main.email;
         localStorage.setItem('employee', JSON.stringify(this.user));
+        this.$emit("profileChanged", this.user.name);
         this.buildSkillColor();
         this.initLangChart();
       } else {

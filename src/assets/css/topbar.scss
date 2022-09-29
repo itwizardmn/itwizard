@@ -130,6 +130,16 @@
                       transform: translateY(-50%);
                     }
                 }
+
+                .select_d.name {
+                  p {
+                    margin: 0;
+                    width: 90%;
+                    white-space: nowrap;
+                    overflow: hidden !important;
+                    text-overflow: ellipsis;
+                  }
+                }
         
                 .f-marko {
                   color: #fff;

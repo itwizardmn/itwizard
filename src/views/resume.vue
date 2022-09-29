@@ -14,23 +14,23 @@
       <el-card class="box-card">
         <table>
           <tr>
-            <td colspan="2"><strong>IT Wizard</strong> ХХК-ний албан хэрэгцээнд зориулав.</td>
+            <td colspan="2" v-html="$textApi('resumeTitle')"></td>
           </tr>
           <tr>
             <td>1. </td>
-            <td>Анкетыг тодорхой, үг товчлохгүйгээр бичнэ үү.</td>
+            <td v-html="$textApi('resumeReq1')"></td>
           </tr>
           <tr>
             <td>2. </td>
-            <td>Анкетыг илгээхээс өмнө уншиж танилцана уу.</td>
+            <td v-html="$textApi('resumeReq2')"></td>
           </tr>
           <tr>
             <td>3. </td>
-            <td>Крилл үсгээр бичнэ үү.</td>
+            <td v-html="$textApi('resumeReq3')"></td>
           </tr>
           <tr>
             <td>4. </td>
-            <td>( * ) агуулсан талбарыг заавал бөглөнө үү.</td>
+            <td v-html="$textApi('resumeReq4')"></td>
           </tr>
         </table>
       </el-card>

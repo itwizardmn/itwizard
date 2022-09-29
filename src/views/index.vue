@@ -130,10 +130,12 @@ export default {
       teams: [],
       selectedTeam: 0,
       projects: [],
-      blogs: []
+      blogs: [],
+      lang: null
     }
   },
   created() {
+    this.lang = localStorage.getItem('lang');
     this.getBlogs();
   },
   mounted() {
@@ -143,7 +145,7 @@ export default {
   },
   methods: {
     async getBlogs() {
-      const data = await this.$useapi('POST', '/v1/blog/list');
+      const data = await this.$useapi('POST', '/v1/blog/list', { lang: this.lang });
       if (data && data.length > 0) {
         if (data.length > 3) {
           this.blogs = data.splice(0, 3);

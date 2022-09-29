@@ -31,14 +31,15 @@
                 </li>
                 <li v-if="user">
                   <div class="total" style="">
-                    <div class="select_d f-marko" style="border: none;" @click="drop.user = !drop.user">{{user.name}}
+                    <div class="select_d name f-marko" style="border: none;" @click="drop.user = !drop.user">
+                      <p>{{user.name}}</p>
                       <span class="down">
                         <i class="el-icon-arrow-down"></i>
                       </span>
                     </div>
                     <ul class="select_op" v-bind:class="{'open': drop.user}">
-                      <li @click="$router.push('/profile');"><a href="javascript:;" class="f-ch f-marko">Миний булан</a></li>
-                      <li @click="logout"><a href="javascript:;" class="a_focus f-marko">гарах</a></li>
+                      <li @click="($router.push('/profile'), drop.user = false)"><a href="javascript:;" class="f-ch f-marko black">{{this.$textApi('myProfile')}}</a></li>
+                      <li @click="logout"><a href="javascript:;" class="a_focus f-marko black">{{this.$textApi('Logout')}}</a></li>
                     </ul>
                   </div>
                 </li>
@@ -54,7 +55,7 @@
     </div>
 
 
-    <router-view/>
+    <router-view @profileChanged="nameChnged"/>
     <Footer/>
     <TopButton/>
     <Youtube/>
@@ -80,8 +81,13 @@ export default {
       language: null
     }
   },
-  created() {
-    this.detectIP();
+  async created() {
+    const lan = localStorage.getItem('lang');
+    if (lan) {
+      this.language = lan;
+    } else {
+      this.language = await this.$detectip();
+    }
   },
   mounted() {
     this.checkRoute();
@@ -90,6 +96,11 @@ export default {
     Event.$on('memberLogged', this.memberLogged);
   },
   methods: {
+    nameChnged(name) {
+      if (this.user && this.user.name) {
+        this.user.name = name;
+      }
+    },
     getText(text) {
       return this.$textApi(text);
     },
@@ -101,43 +112,11 @@ export default {
 
       this.drop.language = false;
     },
-    detectIP() {
-      const lan = localStorage.getItem('lang');
-      
-      if (!lan) {
-        this.$axios({
-          method: 'GET',
-          url: 'https://api.ipify.org?format=json'
-        }).then(data => {
-          this.$axios({
-            method: 'GET',
-            url: 'http://ip-api.com/json/' + data.data.ip
-          }).then(data => {
-            if (data.data.countryCode === 'KR') {
-              localStorage.setItem('lang', 'KR');  
-              this.language = 'KR';
-            } else {
-              localStorage.setItem('lang', 'MN');
-              this.language = 'MN';
-            }
-          }).catch(() => {
-            localStorage.setItem('lang', 'MN');
-            this.language = 'MN';
-          });
-        }).catch(() => {
-          localStorage.setItem('lang', 'MN');
-          this.language = 'MN';
-        });
-      } else {
-        this.language = lan;
-      }
-
-      
-    },
     logout() {
       localStorage.removeItem('employee');
       localStorage.removeItem('token');
       this.user = null;
+      this.drop.user = false;
       this.$router.push('/');
     },
     memberLogged() {

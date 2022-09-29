@@ -21,11 +21,13 @@ export default {
   data() {
     return {
       id: 0,
-      blog: []
+      blog: [],
+      lang: null
     }
   },
   created() {
     if (this.$route.params.id) {
+      this.lang = localStorage.getItem('lang');
       this.id = this.$route.params.id;
       this.getBlog();
     } else {
@@ -34,7 +36,7 @@ export default {
   },
   methods: {
     async getBlog() {
-      const data = await this.$useapi('POST', '/v1/blog/list', {blogSeq: this.id});
+      const data = await this.$useapi('POST', '/v1/blog/list', {blogSeq: this.id, lang: this.lang });
       if (data && data.length > 0) {
         this.blog = data[0];
       }

@@ -27,7 +27,8 @@ export default {
   data() {
     return {
       blogs: [],
-      conType: 0
+      conType: 0,
+      lang: null
     }
   },
   computed: {
@@ -44,6 +45,7 @@ export default {
     }
   },
   created() {
+    this.lang = localStorage.getItem('lang');
     this.getBlogs();
   },
   methods: {
@@ -83,7 +85,7 @@ export default {
       this.move(event.currentTarget);
     },
     async getBlogs() {
-      const data = await this.$useapi('POST', '/v1/blog/list');
+      const data = await this.$useapi('POST', '/v1/blog/list', { lang: this.lang });
       if (data && data.length > 0) {
         this.blogs = data;
       }

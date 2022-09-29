@@ -73,6 +73,41 @@ const url = 'http://192.168.0.155:5100';
 const imgUrl = 'http://192.168.0.155:5100/v2/common/download/';
 axios.defaults.baseURL = url;
 
+const detectIP = async () => {
+  let ip = await axios({
+    method: 'GET',
+    url: 'https://api.ipify.org?format=json'
+  }).then(data => {
+    return data.data.ip;
+  }).catch(() => {
+    localStorage.setItem('lang', 'MN');
+    return 'MN'
+  });
+
+  if (ip === 'MN') {
+    return 'MN';
+  } else {
+    let result =  await axios({
+        method: 'GET',
+        url: 'http://ip-api.com/json/' + ip
+      }).then(data => {
+        if (data.data.countryCode === 'KR') {
+          localStorage.setItem('lang', 'KR');  
+          return 'KR'
+        } else {
+          localStorage.setItem('lang', 'MN');
+          return 'MN'
+        }
+      }).catch(() => {
+        localStorage.setItem('lang', 'MN');
+        return 'MN'
+      });
+
+      return result;
+  }
+
+  
+}
 const token = localStorage.getItem('token');
 
 if(token != null) {
@@ -111,6 +146,7 @@ Vue.prototype.$useapi = useapi;
 Vue.prototype.$imgUrl = imgUrl;
 Vue.prototype.$chart = Chart;
 Vue.prototype.$textApi = textApi;
+Vue.prototype.$detectip = detectIP;
 
 Vue.use(ElementUI, { locale })
 // Vue.use(axios);
