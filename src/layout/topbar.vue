@@ -7,26 +7,49 @@
       </div>
 
       <div class="pc_menu">
-        <th>
-          <td><router-link to="/about">Бидний тухай</router-link></td>
-          <td><router-link to="/career">Хүний нөөц</router-link></td>
-          <td><router-link to="/teams">Хамт олон</router-link></td>
-          <td><router-link to="/blogs">Блог</router-link></td>
-          <td><router-link to="/product">Бүтээл</router-link></td>
-          <td v-if="user">
-            <!-- <a href="javascript:;"><p>Сайн уу, {{user.name}}</p></a> -->
+        <div class="gnb">
+          <div id="menu" class="menu">
+            <div class="inner">
+              <ul>
+                <li><router-link to="/about"><span>{{getText('about')}}</span></router-link></li>
+                <li><router-link to="/career"><span>{{getText('career')}}</span></router-link></li>
+                <li><router-link to="/teams"><span>{{getText('team')}}</span></router-link></li>
+                <li><router-link to="/blogs"><span>{{getText('blog')}}</span></router-link></li>
+                <li><router-link to="/product"><span>{{getText('product')}}</span></router-link></li>
+                <li v-if="language">
+                  <div class="total" style="">
+                    <div class="select_d f-marko" @click="drop.language = !drop.language"> {{language === 'MN' ? 'МОНГОЛ': '대한민국'}}
+                      <span class="down">
+                        <i class="el-icon-arrow-down"></i>
+                      </span>
+                    </div>
+                    <ul class="select_op" v-bind:class="{'open': drop.language}">
+                      <li @click="setLanguage('MN')"><a href="javascript:;" class="f-ch f-marko black">МОНГОЛ</a></li>
+                      <li @click="setLanguage('KR')"><a href="javascript:;" class="a_focus f-marko black">대한민국</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li v-if="user">
+                  <div class="total" style="">
+                    <div class="select_d f-marko" style="border: none;" @click="drop.user = !drop.user">{{user.name}}
+                      <span class="down">
+                        <i class="el-icon-arrow-down"></i>
+                      </span>
+                    </div>
+                    <ul class="select_op" v-bind:class="{'open': drop.user}">
+                      <li @click="$router.push('/profile');"><a href="javascript:;" class="f-ch f-marko">Миний булан</a></li>
+                      <li @click="logout"><a href="javascript:;" class="a_focus f-marko">гарах</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <el-dropdown trigger="click" placement="top-start">
-              <p class="el-dropdown-link">
-                Сайн уу, {{user.name}}<i class="el-icon-arrow-down el-icon--right"></i>
-              </p>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="$router.push('/profile');">Миний булан</el-dropdown-item>
-                <el-dropdown-item @click.native="logout" divided>Гарах</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </td>
-        </th>
+      <div class="mo_menu">
+
       </div>
     </div>
 
@@ -34,20 +57,31 @@
     <router-view/>
     <Footer/>
     <TopButton/>
+    <Youtube/>
   </div>
 </template>
 <script>
 import Footer from '@/layout/footer.vue';
-import TopButton from '@/components/TopButton.vue'
+import TopButton from '@/components/TopButton.vue';
+import Youtube from '@/components/Youtube.vue'
 export default {
   components: {
     Footer,
-    TopButton
+    TopButton,
+    Youtube
   },
   data() {
     return {
-      user: null
+      user: null,
+      drop: {
+        language: false,
+        user: false
+      },
+      language: null
     }
+  },
+  created() {
+    this.detectIP();
   },
   mounted() {
     this.checkRoute();
@@ -56,6 +90,50 @@ export default {
     Event.$on('memberLogged', this.memberLogged);
   },
   methods: {
+    getText(text) {
+      return this.$textApi(text);
+    },
+    setLanguage(lang) {
+      if (lang !== this.language) {
+        localStorage.setItem('lang', lang)
+        window.location.reload();
+      }
+
+      this.drop.language = false;
+    },
+    detectIP() {
+      const lan = localStorage.getItem('lang');
+      
+      if (!lan) {
+        this.$axios({
+          method: 'GET',
+          url: 'https://api.ipify.org?format=json'
+        }).then(data => {
+          this.$axios({
+            method: 'GET',
+            url: 'http://ip-api.com/json/' + data.data.ip
+          }).then(data => {
+            if (data.data.countryCode === 'KR') {
+              localStorage.setItem('lang', 'KR');  
+              this.language = 'KR';
+            } else {
+              localStorage.setItem('lang', 'MN');
+              this.language = 'MN';
+            }
+          }).catch(() => {
+            localStorage.setItem('lang', 'MN');
+            this.language = 'MN';
+          });
+        }).catch(() => {
+          localStorage.setItem('lang', 'MN');
+          this.language = 'MN';
+        });
+      } else {
+        this.language = lan;
+      }
+
+      
+    },
     logout() {
       localStorage.removeItem('employee');
       localStorage.removeItem('token');

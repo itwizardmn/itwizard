@@ -4,9 +4,9 @@
     <table ref="menu">
         <tr>
             <td class="active" @click="changeType" data=0>All</td>
-            <td @click="changeType" data=1>#Блог</td>
-            <td @click="changeType" data=2>#Мэдээ мэдээлэл</td>
-            <td @click="changeType" data=3>#Ярилцлага</td>
+            <td @click="changeType" data=1>#{{getText('blog')}}</td>
+            <td @click="changeType" data=2>#{{getText('news')}}</td>
+            <td @click="changeType" data=3>#{{getText('talking')}}</td>
         </tr>
     </table>
       <ul class="banner-link">
@@ -47,6 +47,9 @@ export default {
     this.getBlogs();
   },
   methods: {
+    getText(text) {
+        return this.$textApi(text);
+    },
     move(target) {
       target.classList.add('active');
       let middle = window.innerWidth / 3;

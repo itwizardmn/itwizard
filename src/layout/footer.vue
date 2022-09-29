@@ -12,13 +12,13 @@
                             itwizard.
                         </router-link>
                         <div class="copyright">
-                            Бүх эрхийг хуулиар хамгаалсан <strong><span>IT Wizard</span></strong>. <br><span id="copyRightYear">©2021</span>
+                            Copyright, <strong><span>IT Wizard</span></strong>. All rights reserved.<br><span id="copyRightYear">©2021</span>
                         </div>
 
                     </div>
 
                     <div class="address">
-                        <p><span class="email"><a href="mailto:admin@itwizard.mn" style="color: #000;">admin@itwizard.mn</a></span><br>Монгол улс, Улаанбаатар хот, Баянгол дүүрэг, 2-р хороо, 2-р хороолол, <br class="pcBreak">Сөүлийн гудамж, 47/1 байр<br>+976 7511-0023</p>
+                        <p><span class="email"><a href="mailto:admin@itwizard.mn" style="color: #000;">{{getText('email')}}</a></span><br><span style="text-decoration: none;" v-html="getText('address')"></span><br>{{getText('phone')}}</p>
                     </div>
                 </div>
                 <div class="social-links mb-4">
@@ -38,3 +38,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        getText(text) {
+            return this.$textApi(text);
+        }
+    }
+}
+</script>

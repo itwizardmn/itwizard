@@ -51,7 +51,7 @@
             </el-col>
             <el-col :sm="24" :md="8">
               <el-form-item prop="main.birthdate">
-                <el-date-picker style="width: 100%" v-model="userInfo.main.birthdate" type="date" placeholder="Төрсөн огноо *"></el-date-picker>
+                <el-date-picker :picker-options="pickerOptions.disable" style="width: 100%" v-model="userInfo.main.birthdate" type="date" placeholder="Төрсөн огноо *"></el-date-picker>
               </el-form-item>
             </el-col>
           </el-row>
@@ -100,7 +100,7 @@
             </el-col>
             <el-col :sm="24" :md="4">
               <el-form-item :prop="'family[' + idx + '].birthdate'">
-                <el-date-picker style="width: 100%" v-model="item.birthdate" type="date" placeholder="Төрсөн огноо *"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.birthdate" type="date" :picker-options="pickerOptions.disable" placeholder="Төрсөн огноо *"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="2">
@@ -124,12 +124,12 @@
             </el-col>
             <el-col :sm="24" :md="5">
               <el-form-item prop="edu.any"> 
-                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" :picker-options="pickerOptions.disable" @change="dateChanged('family')" placeholder="Элссэн огноо"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" :picker-options="pickerOptions.disable" placeholder="Элссэн огноо"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="5">
               <el-form-item prop="edu.any" align="left">
-                <el-date-picker style="width: 100%" v-model="item.outYear" ref="eduOutYear" type="date" placeholder="Төгссөн огноо"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.outYear" ref="eduOutYear" :picker-options="getPickerOpt(item)" type="date" placeholder="Төгссөн огноо"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="2">
@@ -191,12 +191,12 @@
             </el-col>
             <el-col :sm="24" :md="4">
               <el-form-item :prop="'experience[' +idx+ '].inYear'">
-                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" placeholder="Орсон огноо *"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" :picker-options="pickerOptions.disable" placeholder="Орсон огноо *"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
               <el-form-item :prop="'experience[' +idx+ '].outYear'" align="left">
-                <el-date-picker style="width: 100%" v-model="item.outYear" type="date" placeholder="Гарсан огноо *"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.outYear" type="date" :picker-options="getPickerOpt(item)" placeholder="Гарсан огноо *"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
@@ -271,11 +271,6 @@ export default {
     return {
       pickerOptions: {
         disable: {
-          disabledDate (date) {
-            return date > new Date()
-          }
-        },
-        family: {
           disabledDate (date) {
             return date > new Date()
           }
@@ -392,8 +387,20 @@ export default {
     }
   },
   methods: {
-    dateChanged(ref) {
-      console.log(this.pickerOptions[ref].disabledDate);
+    getPickerOpt(item) {
+      if (item.inYear && item.inYear != '') {
+        return {
+          disabledDate (date) {
+            return new Date(item.inYear) > date ||  date > new Date();
+          }
+        }
+      } else {
+        return {
+          disabledDate (date) {
+            return date > new Date();
+          }
+        }
+      }
     },
     addFamily() {
       this.userInfo.family.push({role: '',name: '',profession: '',birthdate: ''});

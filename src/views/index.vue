@@ -9,7 +9,9 @@
               <!-- <p class="container">We are<br>Wizards</p> -->
               <p class="container">WE ARE<br>IT WIZARDS</p>
             </div>
-            <video src="@/assets/video/video.mp4" autoplay muted loop></video>
+            <video autoplay muted loop>
+              <source src="@/assets/video/video.mp4">
+            </video>
           </div>
           <!-- <div class="swiper-slide">Slide 2</div>
           <div class="swiper-slide">Slide 3</div> -->
@@ -25,26 +27,19 @@
       </div></router-link> -->
       <div class="text-container">
         <div class="col">
-          <div class="name">Бид хөгжүүлэгчээс юу хүсдэг вэ?</div>
+          <div class="name" v-html="$textApi('weAreWanna')"></div>
           <div class="title">
             <!-- Бид хөгжүүлэгчээс юу хүсдэг вэ? -->
           </div>
-          <div class="contain">
-            Тууштай байдал, суралцах хүсэл эрмэлзэл.
+          <div class="contain" v-html="$textApi('weAreWannaText')">
           </div>
         </div>
         <div class="col">
-          <div class="name">Бидний тухай</div>
+          <div class="name">{{this.$textApi('about')}}</div>
           <div class="title">
             <!-- Бидний тухай -->
           </div>
-          <div class="contain">
-            Манай хамт олон нь 2016 оноос хойш үйл ажиллагаагаа явуулж байгаа 
-            бөгөөд бид Солонгосын зах зээл дээрх Мэдээлэл технологийн төслүүдийг
-            гүйцэтгэж дотоодын зах зээлээс хараат бус ажилладаг болно. Энэ
-            чиглэлээр олон жил ажилласан туршлагатай хамт олон бүрдүүлэн үйл
-            ажиллагаа явуулж байгаа бөгөөд Мэдээлэл технологийн салбарт хөл
-            тавьж буй залуу эрин үеийг дэмжин ажиллахдаа таатай байна.
+          <div class="contain" v-html="$textApi('aboutText')">
           </div>
         </div>
       </div>

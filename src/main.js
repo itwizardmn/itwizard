@@ -9,6 +9,7 @@ import 'swiper/css/pagination'
 import { gsap, ScrollTrigger } from 'gsap/all';
 import { CSSPlugin } from 'gsap/CSSPlugin'
 import axios from 'axios';
+import textApi from '@/assets/js/utils';
 import {Chart,ArcElement,
   LineElement,
   BarElement,
@@ -71,6 +72,7 @@ import locale from 'element-ui/lib/locale/lang/en'
 const url = 'http://192.168.0.155:5100';
 const imgUrl = 'http://192.168.0.155:5100/v2/common/download/';
 axios.defaults.baseURL = url;
+
 const token = localStorage.getItem('token');
 
 if(token != null) {
@@ -88,7 +90,7 @@ const useapi = async (method, url, data) => {
     console.log(err);
     return false;
   });
-  
+
   if (!response) {
     return false;
   }
@@ -108,6 +110,7 @@ Vue.prototype.$serverUrl = url;
 Vue.prototype.$useapi = useapi;
 Vue.prototype.$imgUrl = imgUrl;
 Vue.prototype.$chart = Chart;
+Vue.prototype.$textApi = textApi;
 
 Vue.use(ElementUI, { locale })
 // Vue.use(axios);

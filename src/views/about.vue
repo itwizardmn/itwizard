@@ -15,8 +15,8 @@
 
         <div class="main">
           <div class="txt">
-            <p class="txt-title">Мэдээлэл технологийн салбарыг тэргүүлнэ</p>
-            <p>Манай хамт олон нь 2016 оноос хойш үйл ажиллагаагаа явуулж байгаа бөгөөд бид Солонгосын зах зээл дээрх Мэдээлэл технологийн төслүүдийг гүйцэтгэж дотоодын зах зээлээс хараат бус ажилладаг болно. Энэ чиглэлээр олон жил ажилласан туршлагатай хамт олон бүрдүүлэн үйл ажиллагаа явуулж байгаа бөгөөд Мэдээлэл технологийн салбарт хөл тавьж буй залуу эрин үеийг дэмжин ажиллахдаа таатай байна. Бидний эрхэм зорилго дэлхий ертөнц хурдтай өөрчлөгдөж, цахим хувьсгал өрнөж буй энэ эрин үед технологид суурилсан амжилтын гол чиглүүлэгч түнш нь байх үнэтэй хариуцлагатай үйлсэд бид бүхий л хүч чадлаа зориулан залуу эрин үеийг дэмжин ажиллах болно.</p>
+            <p class="txt-title" v-html="$textApi('aboutTitle')"></p>
+            <p v-html="$textApi('aboutText')"></p>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
 
     <div class="little-keyVisual-2">
       <div class="curtain-blck"></div>
-        <div class="history-text">our history</div>
+        <div class="history-text">{{$textApi('ourHistory')}}</div>
         <img src="@/assets/image/content/itwizard_wall.jpg" alt="">
       </div>
 
@@ -33,25 +33,25 @@
         <div class="container-timeline left">
           <div class="content-timeline">
             <h2>2018</h2>
-            <p>OKtomato, morensoft, ilpanbiz etc... олон тооны компаниудтай хамтран IT outsourcing хийх гэрээ байгуулан амжилттай ажиллаж байна.</p>
+            <p>{{this.$textApi('history2018')}}</p>
           </div>
         </div>
         <div class="container-timeline right">
           <div class="content-timeline">
             <h2>2019</h2>
-            <p>IT outsourcing салбар болон outsourcing SI хөгжүүлэлт хийж хүрээгээ тэлсэн.</p>
+            <p>{{this.$textApi('history2019')}}</p>
           </div>
         </div>
         <div class="container-timeline left">
           <div class="content-timeline">
             <h2>2020</h2>
-            <p>Төрөл бүрийн шийдэл боловсруулах, засвар үйлчилгээний ажиллууд хийгээд байна.</p>
+            <p>{{this.$textApi('history2020')}}</p>
           </div>
         </div>
         <div class="container-timeline right">
           <div class="content-timeline">
             <h2>2021</h2>
-            <p>Солонгос IT Outsourcing хөгжүүлэлт одоогоор (60 гаруй прожект дээр ажиллаад байна).</p>
+            <p>{{this.$textApi('history2021')}}</p>
           </div>
         </div>
       </div>
@@ -62,15 +62,13 @@
         <el-row :gutter="100">
           <el-col :sm="24" :md="12">
               <div class="contact-inner">
-                <div class="title">
-                  Хэрвээ бидэнтэй хамтарч<br>ажиллахыг хүсвэл.
+                <div class="title" v-html="$textApi('ifYouWanna')">
                 </div>
 
-                <div class="description">
-                  Бид хөгжүүлэгч таны сайн хамтрагч,<br>дэмжигч байх болно.
+                <div class="description" v-html="$textApi('ifYouWannaQ')">
                 </div>
 
-                <el-button type="primary" class="inputs" @click="$router.push('/career')">Нээлттэй ажлын байр</el-button>
+                <el-button type="primary" class="inputs" @click="$router.push('/career')">{{this.$textApi('workplace')}}</el-button>
               </div>
           </el-col>
           <el-col :sm="24" :md="12">

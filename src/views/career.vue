@@ -15,7 +15,7 @@
 
         <div class="career__description">
           <div class="panel panel-title">
-            <p>Бид танд санал болгож<br>байна.</p>
+            <p v-html="$textApi('recommendedYou')"></p>
           </div>
           <div class="panel">
             <div>
@@ -29,12 +29,12 @@
                 <li>연차/반차/반반차 그리고 남녀 모두 편하게 사용하는 월 1회 보건휴가</li>
                 <li>3/5/7년 장기근속자 휴가 및 지원금 제도</li>
                 <li>매년 5월엔 가족과 풍요로운 시간을 보내기 위한 식사비 지원</li> -->
-                <li>Тав тухтай ажиллах орчин</li>
-                <li>Эрч хүчтэй, найрсаг, чадварлаг залуу хамт олон</li>
-                <li>Хөдөлмөрийн зах зээлд өрсөлдөхүйц цалин</li>
-                <li>Улирал бүр бонус цалин</li>
-                <li>Унааны мөнгө</li>
-                <li>Тасралтгүй хөгжих, суралцах боломжийг олгоно</li>
+                <li v-html="$textApi('recomm1')"></li>
+                <li v-html="$textApi('recomm2')"></li>
+                <li v-html="$textApi('recomm3')"></li>
+                <li v-html="$textApi('recomm4')"></li>
+                <li v-html="$textApi('recomm5')"></li>
+                <li v-html="$textApi('recomm6')"></li>
               </ul>
             </div>
           </div>
@@ -45,40 +45,40 @@
     <div class="logo_wall">
       <img src="@/assets/image/content/blurred.jpg" alt="">
       <div class="container">
-        <div class="title">
-          <span>Хэрвээ анкет</span><br>илгээх бол.
+        <div class="title" v-html="$textApi('ifYouWannaSendCareer')">
+          <!-- <span>Хэрвээ анкет</span><br>илгээх бол. -->
         </div>
       </div>
     </div>
 
     <div class="container">
-      <div class="cv-title">Сонгон шалгаруулах үе шат</div>
+      <div class="cv-title">{{this.$textApi('careerSteps')}}</div>
       <div class="cv-steps">
-        <div class="step">Анкет хүлээн<br>авах</div>
+        <div class="step" v-html="$textApi('step1')"></div>
         <div class="shape">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
         </div>
-        <div class="step">Анкетын<br>шалгаруулалт</div>
+        <div class="step" v-html="$textApi('step2')"></div>
         <div class="shape">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
         </div>
-        <div class="step">Ярилцлага<br>уулзалт</div>
+        <div class="step" v-html="$textApi('step3')"></div>
         <div class="shape">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
         </div>
-        <div class="step">Ажилд авах<br>санал</div>
+        <div class="step" v-html="$textApi('step4')"></div>
       </div>
 
       <div class="career-anket">
         <div class="line-title">
-          Өргөдөл гаргахаасаа өмнө шалгах
+          {{this.$textApi('checkBeforeSendCareer')}}
         </div>
         <div class="checklist">
           <ul>
-            <li>Анкет илгээхдээ өөрийн нэр, холбоо барих хаяг, цахим шуудангийн хаяг, ажлын туршлагаа үнэн зөв бөглөнө үү.</li>
-            <li>Анкет дээр бичсэн мэдээлэл, ажлын туршлага худал байвал элсэлтийг цуцалж болно.</li>
-            <li>Ажилд авах процесс дээр тухайн албан тушаалаас хамааран <strong>нэмэлт ярилцлага</strong>, <strong>лавлагаа</strong>,<br><strong>шалгалт</strong> гэх мэт зүйлс нэмэгдэж болно.</li>
-            <li>Дэмжлэгтэй холбоотой лавлагаа авахыг хүсвэл <strong>admin@itwizard.mn</strong> хаягаар имэйл илгээнэ үү.</li>
+            <li v-html="$textApi('require1')"></li>
+            <li v-html="$textApi('require2')"></li>
+            <li v-html="$textApi('require3')"></li>
+            <li v-html="$textApi('require4')"></li>
           </ul>
         </div>
       </div>
@@ -94,7 +94,7 @@
               </tr>
           </table> -->
           <div class="line-title" style="border: none;">
-            Нээлттэй ажлын байр
+            {{this.$textApi('workplace')}}
           </div>
         </div>
 
