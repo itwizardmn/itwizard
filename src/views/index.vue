@@ -12,6 +12,15 @@
             <video autoplay muted loop>
               <source src="@/assets/video/video.mp4">
             </video>
+            <!-- <div style="pointer-events: none;">
+              <iframe 
+              src="https://player.vimeo.com/video/755132568?h=376a3d1235&amp;autoplay=1&amp;loop=1&amp;title=0&amp;sidedock=0&amp;autopause=0&amp;app_id=58479" 
+              frameborder="0" 
+              allow="autoplay; fullscreen;" 
+              allowfullscreen 
+              style="position:absolute;top:0;left:0;width:100%;height:100%;">
+              </iframe>
+            </div> -->
           </div>
           <!-- <div class="swiper-slide">Slide 2</div>
           <div class="swiper-slide">Slide 3</div> -->
@@ -134,8 +143,13 @@ export default {
       lang: null
     }
   },
-  created() {
-    this.lang = localStorage.getItem('lang');
+  async created() {
+    const lan = localStorage.getItem('lang');
+    if (lan) {
+      this.lang = lan;
+    } else {
+      this.lang = await this.$detectip();
+    }
     this.getBlogs();
   },
   mounted() {

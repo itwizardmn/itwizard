@@ -1,6 +1,6 @@
 ﻿<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="about-page">
+  <div class="about-page" style="overflow: hidden;">
     <div class="little-keyVisual" ref="keyvisual">
       <div class="curtain-white"></div>
       <img src="@/assets/image/content/about.jpg" alt="">
@@ -140,20 +140,20 @@ export default {
     }
   },
   mounted() {
-    this.$srollTrigger.create({
-        trigger: this.$refs.keyvisual,
-        start: "top top",
-        pin: true,
-        pinSpacing: false
-      });
+    // this.$srollTrigger.create({
+    //     trigger: this.$refs.keyvisual,
+    //     start: "top top",
+    //     pin: true,
+    //     pinSpacing: false
+    //   });
 
-    this.$srollTrigger.create({
-      trigger: this.$refs.pinned,
-      start: "top top",
-      pin: true,
-      pinSpacing: false,
-      end: 'bottom bottom'
-    });
+    // this.$srollTrigger.create({
+    //   trigger: this.$refs.pinned,
+    //   start: "top top",
+    //   pin: true,
+    //   pinSpacing: false,
+    //   end: 'bottom bottom'
+    // });
   }
 }
 </script>

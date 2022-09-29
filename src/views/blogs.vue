@@ -44,8 +44,13 @@ export default {
       return arr;
     }
   },
-  created() {
-    this.lang = localStorage.getItem('lang');
+  async created() {
+    const lan = localStorage.getItem('lang');
+    if (lan) {
+      this.lang = lan;
+    } else {
+      this.lang = await this.$detectip();
+    }
     this.getBlogs();
   },
   methods: {

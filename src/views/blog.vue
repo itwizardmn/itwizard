@@ -25,9 +25,15 @@ export default {
       lang: null
     }
   },
-  created() {
+  async created() {
     if (this.$route.params.id) {
-      this.lang = localStorage.getItem('lang');
+      const lan = localStorage.getItem('lang');
+      if (lan) {
+        this.lang = lan;
+      } else {
+        this.lang = await this.$detectip();
+      }
+      
       this.id = this.$route.params.id;
       this.getBlog();
     } else {

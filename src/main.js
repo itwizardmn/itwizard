@@ -83,6 +83,7 @@ const detectIP = async () => {
     localStorage.setItem('lang', 'MN');
     return 'MN'
   });
+  
 
   if (ip === 'MN') {
     return 'MN';
@@ -108,6 +109,7 @@ const detectIP = async () => {
 
   
 }
+
 const token = localStorage.getItem('token');
 
 if(token != null) {

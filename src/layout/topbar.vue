@@ -50,14 +50,47 @@
       </div>
 
       <div class="mo_menu">
-
+        <div class="menu" @click="mobile.menu = true">
+          <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="100px" height="100px"><path d="M 3 7 A 1.0001 1.0001 0 1 0 3 9 L 27 9 A 1.0001 1.0001 0 1 0 27 7 L 3 7 z M 3 14 A 1.0001 1.0001 0 1 0 3 16 L 27 16 A 1.0001 1.0001 0 1 0 27 14 L 3 14 z M 3 21 A 1.0001 1.0001 0 1 0 3 23 L 27 23 A 1.0001 1.0001 0 1 0 27 21 L 3 21 z"/></svg>
+        </div>
       </div>
     </div>
+
+    <el-drawer :visible.sync="mobile.menu" direction="ttb" size="100%" style="width: 100%;">
+      <div class="mobile-menu">
+        <ul>
+          <li><router-link to="/about"><span class="menu-text">{{getText('about')}}</span></router-link></li>
+          <li><router-link to="/career"><span class="menu-text">{{getText('career')}}</span></router-link></li>
+          <li><router-link to="/teams"><span class="menu-text">{{getText('team')}}</span></router-link></li>
+          <li><router-link to="/blogs"><span class="menu-text">{{getText('blog')}}</span></router-link></li>
+          <li><router-link to="/product"><span class="menu-text">{{getText('product')}}</span></router-link></li>
+          <li v-if="user" @click="($router.push('/profile'), drop.user = false)"><span class="menu-text">{{getText('myProfile')}}</span></li>
+          <li v-if="user" @click="logout"><span class="menu-text">{{getText('Logout')}}</span></li>
+        </ul>
+
+        <div class="copyright">
+          Copyright, <strong><span>IT Wizard</span></strong>. All rights reserved. <span id="copyRightYear">©2021</span>
+        </div>
+
+        <div class="total" style="" v-if="language">
+          <div class="select_d f-marko" @click="drop.language = !drop.language">
+            <p class="lang-cont">{{language === 'MN' ? 'МОНГОЛ': '대한민국'}}</p>
+            <span class="down">
+              <i class="el-icon-arrow-down"></i>
+            </span>
+          </div>
+          <ul class="select_op" v-bind:class="{'open': drop.language}">
+            <li @click="setLanguage('MN')"><a href="javascript:;" class="f-ch f-marko black">МОНГОЛ</a></li>
+            <li @click="setLanguage('KR')"><a href="javascript:;" class="a_focus f-marko black">대한민국</a></li>
+          </ul>
+        </div>
+      </div>
+    </el-drawer>
 
 
     <router-view @profileChanged="nameChnged"/>
     <Footer/>
-    <TopButton/>
+    <TopButton v-if="!mobile.menu"/>
     <Youtube/>
   </div>
 </template>
@@ -78,8 +111,15 @@ export default {
         language: false,
         user: false
       },
-      language: null
+      language: null,
+      mobile: {
+        menu: false
+      }
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.mobile.menu = false;
+    next();
   },
   async created() {
     const lan = localStorage.getItem('lang');
@@ -117,6 +157,7 @@ export default {
       localStorage.removeItem('token');
       this.user = null;
       this.drop.user = false;
+      this.mobile.menu = false;
       this.$router.push('/');
     },
     memberLogged() {
