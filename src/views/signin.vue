@@ -13,52 +13,47 @@
             <div class="register__menu__sub" v-bind:class="{'active': !active}" @click="active = false">Бүртгүүлэх</div>
           </div> -->
 
-          <div class="register__form active">
+          <div class="register__form" v-bind:class="{'active': active}">
             <el-form :model="login" :rules="regx.login" ref="loginFrom" @submit.native.prevent="Login">
               <el-col :sm="24" :md="24">
                 <el-form-item prop="username">
-                  <el-input placeholder="Хэрэглэгчийн нэр" v-model="login.username" clearable auto-complete="off"></el-input>
+                  <el-input :disabled="loading" :placeholder="$textApi('username')" v-model="login.username" clearable auto-complete="off"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :sm="24" :md="24">
                 <el-form-item prop="password">
-                  <el-input placeholder="Нууц үг" v-model="login.password" clearable show-password auto-complete="off"></el-input>
+                  <el-input :disabled="loading" :placeholder="$textApi('password')" v-model="login.password" clearable show-password auto-complete="off"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :sm="24" :md="24">
-                <el-button type="primary" native-type="submit" class="resumte-submit" :loading="loading">{{loading ? 'Түр хүлээнэ үү' : 'Үргэлжлүүлэх'}}</el-button>
+                <el-button type="primary" native-type="submit" class="resumte-submit" :loading="loading">{{loading ? this.$textApi('waiting') : this.$textApi('Login')}}</el-button>
               </el-col>
 
               <el-col :sm="24" :md="24">
                 <div align="right" style="margin-top: 10px;">
-                  <a href="javascript:;" class="forgot-password">Нууц үгээ мартсан?</a>
+                  <a href="javascript:;" @click="active = false" class="forgot-password" v-html="$textApi('forgotPassword')"></a>
                 </div>
               </el-col>
             </el-form>
           </div>
 
-          <!-- <div class="register__form" v-bind:class="{'active': !active}">
+          <div class="register__form" v-bind:class="{'active': !active}">
             <el-form :model="register" :rules="regx.register" ref="registerFrom" @submit.native.prevent="Register">
               <el-col :sm="24" :md="24">
-                <el-form-item prop="name">
-                  <el-input placeholder="Нэр" v-model="register.name" clearable auto-complete="off"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col :sm="24" :md="24">
-                <el-form-item prop="phone">
-                  <el-input placeholder="Утасны дугаар" v-model="register.phone" clearable auto-complete="off"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col :sm="24" :md="24">
                 <el-form-item prop="email">
-                  <el-input placeholder="Имэйл" v-model="register.email" clearable auto-complete="off"></el-input>
+                  <el-input :disabled="loadingRegister" :placeholder="$textApi('username')" v-model="register.email" clearable auto-complete="off"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :sm="24" :md="24">
-                <el-button type="primary" native-type="submit" class="resumte-submit" :loading="loadingRegister">{{loadingRegister ? 'Түр хүлээнэ үү' : 'Үргэлжлүүлэх'}}</el-button>
+                <el-button type="primary" native-type="submit" class="resumte-submit" :loading="loadingRegister">{{loadingRegister ? this.$textApi('waiting') : this.$textApi('next')}}</el-button>
+              </el-col>
+              <el-col :sm="24" :md="24">
+                <div align="right" style="margin-top: 10px;">
+                  <a href="javascript:;" @click="active = true" class="forgot-password" v-html="$textApi('backToLogin')"></a>
+                </div>
               </el-col>
             </el-form>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -76,22 +71,17 @@ export default {
         password: '' 
       },
       register: {
-        name: '',
-        phone: '',
         email: ''
       },
       regx: {
         login: {
           // eslint-disable-next-line no-useless-escape
-          username: [{required: true, message: 'Хэрэглэгчийн нэр', pattern: /^([a-zA-Z0-9._\-]{3,}@[a-zA-Z0-9_-]{2,}\.[a-zA-Z]{2,6})*$/}],
-          password: [{required: true, message: 'Нууц үг'}]
+          username: [{required: true, message: this.$textApi('username'), pattern: /^([a-zA-Z0-9._\-]{3,}@[a-zA-Z0-9_-]{2,}\.[a-zA-Z]{2,6})*$/}],
+          password: [{required: true, message: this.$textApi('password')}]
         },
         register: {
-          name: [{required: true, message: 'Нэр'}],
           // eslint-disable-next-line no-useless-escape
-          phone: [{required: true, message: 'Утасны дугаар', pattern: /^(\d{3}(\-){0,1}){0,1}(\d{8})$/}],
-          // eslint-disable-next-line no-useless-escape
-          email: [{required: true, message: 'Имэйл', pattern: /^([a-zA-Z0-9._\-]{3,}@[a-zA-Z0-9_-]{2,}\.[a-zA-Z]{2,6})*$/}]
+          email: [{required: true, message: this.$textApi('username'), pattern: /^([a-zA-Z0-9._\-]{3,}@[a-zA-Z0-9_-]{2,}\.[a-zA-Z]{2,6})*$/}]
         }
       },
       active: true
@@ -117,11 +107,6 @@ export default {
             // Event.$emit('login');
             this.$axios.defaults.headers.common.Authorization = 'Bearer ' + data.data.data.token;
             Event.$emit('memberLogged');
-            this.$notify({
-              title: 'Амжилттай',
-              message: 'Системд нэвтэрлээ',
-            });
-
             this.$router.push('/');
           }).catch(err => {
             this.loading = false;
@@ -137,36 +122,26 @@ export default {
         }
       });
     },
-    Register() {
-      this.$refs.registerFrom.validate((valid) => {
+    async Register() {
+      this.$refs.registerFrom.validate(async (valid) => {
         if (valid) {
           this.loadingRegister = true;
-
-          this.$axios({
-            method: 'post',
-            url: '/v1/employee/register',
-            headers: {},
-            data: {
-              email: this.register.email,
-              name: this.register.name,
-              phone: this.register.phone
-            }
-          }).then(() => {
-            this.loadingRegister = false;
+          let result = await this.$useapi('POST', '/v1/employee/forgot-password', { email: this.register.email})
+          if (result === 204) {
+            this.$notify({
+              title: 'Амжилтгүй',
+              message: 'Хэрэглэгч олдсонгүй',
+            });
+          } else if (result) {
             this.$notify({
               title: 'Амжилттай',
-              message: 'Бүртгэгдлээ',
+              message: 'Имэйл хаягаа шалгана уу',
             });
-          }).catch(err => {
-            this.loadingRegister = false;
-            if (err.request.status === 409) {
-              this.$notify({
-                title: 'Амжилтгүй',
-                message: 'Бүртгэлтэй хаяг',
-              });
-            }
-          });
 
+            this.active = true;
+          }
+
+          this.loadingRegister = false;
         } else {
           return false;
         }

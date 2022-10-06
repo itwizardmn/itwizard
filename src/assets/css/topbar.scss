@@ -1,4 +1,5 @@
 ﻿@import './utils.scss';
+@import './font.scss';
 .topbar {
   width: 100%;
   // @include vw-convert-desktop(height, 80px);
@@ -67,8 +68,10 @@
       position: absolute;
       right: 0;
       z-index: 999;
-      font-family: 'Montserrat', sans-serif;
+      // font-family: 'Montserrat', sans-serif;
+      font-family: "SecRobotoBold";
       font-size: 15px;
+      font-weight: 400;
       // color: #666;
       // color: #fff;
       line-height: 1.5;

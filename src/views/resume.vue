@@ -37,70 +37,70 @@
 
       <el-form :model="userInfo" :rules="regx" ref="resumeFrom">
         <el-card class="box-card">
-          <div class="group-name">Ерөнхий мэдээлэл</div>
+          <div class="group-name" v-html="$textApi('mainInfo')"></div>
           <el-row :gutter="20">
             <el-col :sm="24" :md="8">
               <el-form-item prop="main.lastname">
-                <el-input placeholder="Овог *" v-model="userInfo.main.lastname" clearable></el-input>
+                <el-input :placeholder="$textApi('lastname') + ' *'" v-model="userInfo.main.lastname" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="8">
               <el-form-item prop="main.firstname">
-                <el-input placeholder="Нэр *" v-model="userInfo.main.firstname" clearable></el-input>
+                <el-input :placeholder="$textApi('firstname') + ' *'" v-model="userInfo.main.firstname" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="8">
               <el-form-item prop="main.birthdate">
-                <el-date-picker :picker-options="pickerOptions.disable" style="width: 100%" v-model="userInfo.main.birthdate" type="date" placeholder="Төрсөн огноо *"></el-date-picker>
+                <el-date-picker :picker-options="pickerOptions.disable" style="width: 100%" v-model="userInfo.main.birthdate" type="date" :placeholder="$textApi('birthdate') + ' *'"></el-date-picker>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
             <el-col :sm="24" :md="8">
               <el-form-item prop="main.phone">
-                <el-input placeholder="Утасны дугаар *" v-model="userInfo.main.phone" clearable></el-input>
+                <el-input :placeholder="$textApi('phoneNumber') + ' *'" v-model="userInfo.main.phone" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="8">
               <el-form-item prop="main.register">
-                <el-input placeholder="Регистрийн дугаар *" @input="userInfo.main.register = userInfo.main.register.toUpperCase()" v-model="userInfo.main.register" clearable></el-input>
+                <el-input :placeholder="$textApi('registerNumber') + ' *'" @input="userInfo.main.register = userInfo.main.register.toUpperCase()" v-model="userInfo.main.register" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="8">
               <el-form-item prop="main.email">
-                <el-input placeholder="Имэйл хаяг *" v-model="userInfo.main.email" clearable></el-input>
+                <el-input :placeholder="$textApi('emailAddress') + ' *'" v-model="userInfo.main.email" clearable></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
             <el-col :sm="24" :md="24">
               <el-form-item prop="main.address">
-                <el-input type="textarea" :rows="2" placeholder="Оршин суугаа хаяг *" v-model="userInfo.main.address"></el-input>
+                <el-input type="textarea" :rows="2" :placeholder="$textApi('homeAddress') + ' *'" v-model="userInfo.main.address"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
         </el-card>
         <el-card class="box-card">
-          <div class="group-name">Гэр бүлийн байдал</div>
+          <div class="group-name" v-html="$textApi('FamiltyStatus')"></div>
           <el-row :gutter="20" v-for="(item, idx) in userInfo.family" :key="idx">
             <el-col :sm="24" :md="5">
-              <el-form-item :prop="'family[' + idx + '].role'">
-                <el-input placeholder="Таны хэн болох *" v-model="item.role" clearable></el-input>
+              <el-form-item>
+                <el-input :placeholder="$textApi('roleOfFamily') + ' *'" v-model="item.role" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="5">
-              <el-form-item :prop="'family[' + idx + '].name'">
-                <el-input placeholder="Нэр *" v-model="item.name" clearable></el-input>
+              <el-form-item>
+                <el-input :placeholder="$textApi('firstname') + ' *'" v-model="item.name" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="8">
-              <el-form-item :prop="'family[' + idx + '].profession'">              
-                <el-input placeholder="Мэргэжил / Ажлын байр *" v-model="item.profession" clearable></el-input>
+              <el-form-item>              
+                <el-input :placeholder="$textApi('professionName') + ' *'" v-model="item.profession" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
-              <el-form-item :prop="'family[' + idx + '].birthdate'">
-                <el-date-picker style="width: 100%" v-model="item.birthdate" type="date" :picker-options="pickerOptions.disable" placeholder="Төрсөн огноо *"></el-date-picker>
+              <el-form-item>
+                <el-date-picker style="width: 100%" v-model="item.birthdate" type="date" :picker-options="pickerOptions.disable" :placeholder="$textApi('birthdate') + ' *'"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="2">
@@ -110,26 +110,26 @@
           </el-row>
         </el-card>
         <el-card class="box-card">
-          <div class="group-name">Боловсролын талаархи мэдээлэл</div>
+          <div class="group-name" v-html="$textApi('EduStatus')"></div>
           <el-row :gutter="20" v-for="(item, idx) in userInfo.edu" :key="idx">
             <el-col :sm="24" :md="6">
               <el-form-item prop="edu.any">
-                <el-input placeholder="Сургуулийн нэр" v-model="item.school" clearable></el-input>
+                <el-input :placeholder="$textApi('schoolName')" v-model="item.school" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="6">
               <el-form-item prop="edu.any">
-                <el-input placeholder="Эзэмшсэн мэргэжил" v-model="item.profession" clearable></el-input>
+                <el-input :placeholder="$textApi('JobName')" v-model="item.profession" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="5">
               <el-form-item prop="edu.any"> 
-                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" :picker-options="pickerOptions.disable" placeholder="Элссэн огноо"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" :picker-options="pickerOptions.disable" :placeholder="$textApi('inYearSchool')"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="5">
               <el-form-item prop="edu.any" align="left">
-                <el-date-picker style="width: 100%" v-model="item.outYear" ref="eduOutYear" :picker-options="getPickerOpt(item)" type="date" placeholder="Төгссөн огноо"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.outYear" ref="eduOutYear" :picker-options="getPickerOpt(item)" type="date" :placeholder="$textApi('outYearSchool')"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="2">
@@ -139,11 +139,11 @@
           </el-row>
         </el-card>
         <el-card class="box-card">
-          <div class="group-name">Гадаад хэлний мэдлэгийн түвшин</div>
+          <div class="group-name" v-html="$textApi('LanguateStatus')"></div>
           <el-row :gutter="20" v-for="(item, idx) in userInfo.lang" :key="idx">
             <el-col :sm="24" :md="12">
               <el-form-item :prop="'lang['+idx+'].language'">
-                <el-select v-model="item.language" filterable placeholder="Гадаад хэл *" style="width: 100%;">
+                <el-select v-model="item.language" filterable :placeholder="$textApi('otherLanguage') + ' *'" style="width: 100%;">
                   <el-option
                     v-for="item in languages"
                     :key="item"
@@ -167,7 +167,7 @@
             </el-col>
             <el-col :sm="24" :md="5">
               <el-form-item :prop="'lang['+idx+'].year'">
-                <el-input placeholder="Судалсан жил *" v-model="item.year" clearable></el-input>
+                <el-input :placeholder="$textApi('learnedYear') + ' *'" v-model="item.year" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="2">
@@ -177,31 +177,31 @@
           </el-row>
         </el-card>
         <el-card class="box-card">
-          <div class="group-name">Ажлын туршлага</div>
+          <div class="group-name" v-html="$textApi('jobExperience')"></div>
           <el-row :gutter="20" v-for="(item, idx) in userInfo.experience" :key="idx">
             <el-col :sm="24" :md="5">
-              <el-form-item :prop="'experience[' +idx+ '].company'">
-                <el-input placeholder="Байгууллагын нэр *" v-model="item.company" clearable></el-input>
+              <el-form-item>
+                <el-input :placeholder="$textApi('compName') + ' *'" v-model="item.company" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="5">
-              <el-form-item :prop="'experience[' +idx+ '].profession'">
-                <el-input placeholder="Албан тушаал *" v-model="item.profession" clearable></el-input>
+              <el-form-item>
+                <el-input :placeholder="$textApi('jobPosition') + ' *'" v-model="item.profession" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
-              <el-form-item :prop="'experience[' +idx+ '].inYear'">
-                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" :picker-options="pickerOptions.disable" placeholder="Орсон огноо *"></el-date-picker>
+              <el-form-item>
+                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" :picker-options="pickerOptions.disable" :placeholder="$textApi('inYear') + ' *'"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
-              <el-form-item :prop="'experience[' +idx+ '].outYear'" align="left">
-                <el-date-picker style="width: 100%" v-model="item.outYear" type="date" :picker-options="getPickerOpt(item)" placeholder="Гарсан огноо *"></el-date-picker>
+              <el-form-item align="left">
+                <el-date-picker style="width: 100%" v-model="item.outYear" type="date" :picker-options="getPickerOpt(item)" :placeholder="$textApi('outYear') + ' *'"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
-              <el-form-item :prop="'experience[' +idx+ '].outReason'" align="left">
-                <el-input placeholder="Гарсан шалтгаан *" v-model="item.outReason" clearable></el-input>
+              <el-form-item align="left">
+                <el-input :placeholder="$textApi('outReason') + ' *'" v-model="item.outReason" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="2">
@@ -212,27 +212,27 @@
         </el-card>
 
         <el-card class="box-card">
-          <div class="group-name">Давуу болон сул тал</div>
+          <div class="group-name" v-html="$textApi('advantageAndNo')"></div>
           <el-row :gutter="20">
             <el-col :sm="24" :md="12">
               <el-form-item prop="personal.advantage">
-                <el-input maxlength="100" show-word-limit type="textarea" :rows="3" placeholder="Таны давуу тал *" v-model="userInfo.personal.advantage" clearable></el-input>
+                <el-input maxlength="100" show-word-limit type="textarea" :rows="3" :placeholder="$textApi('advantage') + ' *'" v-model="userInfo.personal.advantage" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="12">
               <el-form-item prop="personal.disadvantage">
-                <el-input maxlength="100" show-word-limit type="textarea" :rows="3" placeholder="Таны сул тал *" v-model="userInfo.personal.disadvantage" clearable></el-input>
+                <el-input maxlength="100" show-word-limit type="textarea" :rows="3" :placeholder="$textApi('disAdvantage') + ' *'" v-model="userInfo.personal.disadvantage" clearable></el-input>
               </el-form-item>
             </el-col>
           </el-row>
         </el-card>
 
         <el-card class="box-card">
-          <div class="group-name">Ур чадвар</div>
+          <div class="group-name" v-html="$textApi('skill')"></div>
           <el-row :gutter="20" v-for="(item, idx) in userInfo.skill" :key="idx">
             <el-col :sm="24" :md="12">
               <el-form-item :prop="'skill['+idx+'].programm'">
-                <el-input maxlength="100" show-word-limit :rows="3" placeholder="Программын нэр *" v-model="item.programm" clearable></el-input>
+                <el-input maxlength="100" show-word-limit :rows="3" :placeholder="$textApi('programName') + ' *'" v-model="item.programm" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="5">
@@ -248,8 +248,8 @@
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="5">
-              <el-form-item :prop="'lang['+idx+'].year'">
-                <el-input placeholder="Судалсан жил *" v-model="item.year" clearable></el-input>
+              <el-form-item :prop="'skill['+idx+'].year'">
+                <el-input :placeholder="$textApi('learnedYear') + ' *'" v-model="item.year" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="2">
@@ -259,7 +259,7 @@
           </el-row>
         </el-card>
 
-        <el-button type="primary" class="resumte-submit" :loading="loading" @click="submitForm">{{loading ? 'Түр хүлээнэ үү' : 'Анкет илгээх'}}</el-button>
+        <el-button type="primary" class="resumte-submit" :loading="loading" @click="submitForm">{{loading ? this.$textApi('waiting') : this.$textApi('sendResume')}}</el-button>
       </el-form>
     </div>
   </div>
@@ -278,7 +278,7 @@ export default {
       },
       loading: false,
       levels: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10],
-      languages: ['Англи хэл', 'Орос хэл', 'Хятад хэл', 'Солонгос хэл', 'Япон хэл'],
+      languages: ['English', 'Russian', 'Chinese', 'Korean', 'Japanese'],
       userInfo: {
         main: {
           lastname: '',
@@ -335,52 +335,32 @@ export default {
       },
       regx: {
         main: {
-          lastname: [{required: true, message: 'Овог', pattern: /^[а-яөүёА-ЯӨҮЁ]{1,}$/}],
-          firstname: [{required: true, message: 'Нэр', pattern: /^[а-яөүёА-ЯӨҮЁ]{1,}$/}],
-          birthdate: [{required: true, message: 'Төрсөн огноо', }],
+          lastname: [{required: true, message: this.$textApi('lastname'), pattern: /^[а-яөүёА-ЯӨҮЁ]{1,}$/}],
+          firstname: [{required: true, message: this.$textApi('firstname'), pattern: /^[а-яөүёА-ЯӨҮЁ]{1,}$/}],
+          birthdate: [{required: true, message: this.$textApi('birthdate'), }],
           // eslint-disable-next-line no-useless-escape
-          phone: [{required: true, message: 'Утасны дугаар', pattern: /^(\d{3}(\-){0,1}){0,1}(\d{8})$/}],
-          register: [{required: true, message: 'Регистр', pattern: /^[А-ЯӨҮЁ]{2}(\d){8}$/}],
+          phone: [{required: true, message: this.$textApi('phoneNumber'), pattern: /^(\d{3}(\-){0,1}){0,1}(\d{8})$/}],
+          register: [{required: true, message: this.$textApi('registerNumber'), pattern: /^[А-ЯӨҮЁ]{2}(\d){8}$/}],
           // eslint-disable-next-line no-useless-escape
-          email: [{required: true, message: 'Имэйл', pattern: /^([a-zA-Z0-9._\-]{3,}@[a-zA-Z0-9_-]{2,}\.[a-zA-Z]{2,6})*$/}],
-          address: [{required: true, message: 'Оршин суугаа хаяг',  }]
+          email: [{required: true, message: this.$textApi('emailAddress'), pattern: /^([a-zA-Z0-9._\-]{3,}@[a-zA-Z0-9_-]{2,}\.[a-zA-Z]{2,6})*$/}],
+          address: [{required: true, message: this.$textApi('homeAddress'),  pattern: /^[а-яөүёА-ЯӨҮЁ0-9#-_,. ]{1,}$/}]
         },
-        family: [
-          {
-            role: [{required: true, message: 'Таны хэн болох', }],
-            name: [{required: true, message: 'Нэр', }],
-            profession: [{required: true, message: 'Ажлын байр', }],
-            birthdate: [{required: true, message: 'Төрсөн огноо', }]
-          }
-        ],
         lang: [
           {
-            language: [{required: true, message: 'Сонгоно уу'}],
-            percent: [{required: true, message: 'Сонгоно уу'}],
-            year: [{required: true, message: 'Судалсан жил',  pattern: /^[0-9]{1,}$/}]
-          }
-        ],
-        edu: {
-          any: [{required: false}]
-        },
-        experience: [
-          {
-            company: [{required: true, message: 'Байгууллагын нэр' }],
-            profession: [{required: true, message: 'Албан тушаал' }],
-            inYear: [{required: true, message: 'Орсон огноо'}],
-            outYear: [{required: true, message: 'Гарсан огноо' }],
-            outReason: [{required: true, message: 'Гарсан шалтгаан'}]
+            language: [{required: true, message: this.$textApi('pleaseChoose')}],
+            percent: [{required: true, message: this.$textApi('pleaseChoose')}],
+            year: [{required: true, message: this.$textApi('learnedYear'),  pattern: /^\d+$/}]
           }
         ],
         personal: {
-          advantage: [{required: true, message: 'Давуу тал'}],
-          disadvantage: [{required: true, message: 'Сул тал'}]
+          advantage: [{required: true, message: this.$textApi('advantage')}],
+          disadvantage: [{required: true, message: this.$textApi('disAdvantage')}]
         },
         skill: [
           {
-            programm: [{required: true, message: 'Программын нэр'}],
-            level: [{required: true, message: 'Түвшин'}],
-            year: [{required: true, message: 'Судалсан жил',  pattern: /^[0-9]{1,}$/}]
+            programm: [{required: true, message: this.$textApi('programName')}],
+            level: [{required: true, message: this.$textApi('pleaseChoose')}],
+            year: [{required: true, message: this.$textApi('learnedYear'),  pattern: /^\d+$/}]
           }
         ]
       }
@@ -404,28 +384,27 @@ export default {
     },
     addFamily() {
       this.userInfo.family.push({role: '',name: '',profession: '',birthdate: ''});
-      this.regx.family.push({role: [{required: true, message: 'Таны хэн болох' }],name: [{required: true, message: 'Нэр', }],profession: [{required: true, message: 'Ажлын байр', }],birthdate: [{required: true, message: 'Төрсөн огноо', }]});
     },
     addEdu() {
       this.userInfo.edu.push({school: '',profession: '',inYear: '',outYear: ''});
     },
     addLanguage() {
       this.userInfo.lang.push({language: '',percent: '',year: ''});
-      this.regx.lang.push({language: [{required: true, message: 'Сонгоно уу'}],percent: [{required: true, message: 'Сонгоно уу'}],year: [{required: true, message: 'Судалсан жил',  pattern: /^[0-9]{1,}$/}]});
+      this.regx.lang.push({language: [{required: true, message: this.$textApi('pleaseChoose')}],percent: [{required: true, message: this.$textApi('pleaseChoose')}],year: [{required: true, message: this.$textApi('learnedYear'),  pattern: /^\d+$/}]});
     },
     addExp() {
       this.userInfo.experience.push({company: '',profession: '',inYear: '',outYear: '',outReason: ''});
-      this.regx.experience.push({company: [{required: true, message: 'Байгууллагын нэр', }],profession: [{required: true, message: 'Албан тушаал', }],inYear: [{required: true, message: 'Орсон огноо', }],outYear: [{required: true, message: 'Гарсан огноо', }],outReason: [{required: true, message: 'Гарсан шалтгаан', }]});
     },
     addSkill() {
       this.userInfo.skill.push({programm: '',level: '',year: ''});
-      this.regx.skill.push({programm: [{required: true, message: 'Программын нэр'}],level: [{required: true, message: 'Түвшин'}],year: [{required: true, message: 'Судалсан жил',  pattern: /^[0-9]{1,}$/}]});
+      this.regx.skill.push({programm: [{required: true, message: this.$textApi('programName')}],level: [{required: true, message: this.$textApi('pleaseChoose')}],year: [{required: true, message: this.$textApi('learnedYear'),  pattern: /^\d+$/}]});
     },
     submitForm() {
       this.$refs.resumeFrom.validate((valid) => {
         if (valid) {
           this.loading = true;
-
+          this.userInfo.personal.advantage= this.userInfo.personal.advantage.replaceAll('\n', ' ');
+          this.userInfo.personal.disadvantage= this.userInfo.personal.disadvantage.replaceAll('\n', ' ');
           this.$axios({
             method: 'post',
             url: '/v1/employee/create-resume',
@@ -448,6 +427,8 @@ export default {
               personal: {advantage: '',disadvantage: ''},
               skill: [{programm: '',level: ''}]
             };
+
+            this.$router.push('/');
           }).catch(err => {
             console.err(err);
             this.loading = false;

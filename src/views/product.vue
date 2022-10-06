@@ -1,19 +1,19 @@
 ﻿<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div>
+  <div v-loading="pageLoader">
     <!-- background: #f6f6f6; -->
     <div class="products" style="width: 100%;">
-      <div class="group-flex container motion-up" style="margin-top: 0px;">
+      <div class="group-flex motion-up" style="margin-top: 0px;">
           <table>
               <tr>
-                  <td @click="scrollMenu" class="active" group-id="0">All</td>
-                  <td class="uppercase" v-for="(team, index) in teams" :key="index" @click="scrollMenu" :group-id="team.seq">{{team.team_name}}</td>
+                  <td @click="scrollMenu" class="active" group-id="0">#All</td>
+                  <td class="uppercase" v-for="(team, index) in teams" :key="index" @click="scrollMenu" :group-id="team.seq">#{{team.team_name}}</td>
               </tr>
           </table>
       </div>
       <div class="portfolioSwipeContiner">
         <div ref="swiper" class="swiper portfolioSwipe main">
-          <div class="swiper-wrapper">
+          <div class="swiper-wrapper" v-if="projectFilter.length > 0">
             <div class="swiper-slide" v-for="(property, index) in projectFilter" :key="index">
               <img class="image" :src="$imgUrl + property.file_seq" alt="">
               <div class="link">
@@ -22,6 +22,11 @@
               <div class="title">
                   {{property.project_name}}
               </div>
+            </div>
+          </div>
+          <div class="swiper-wrapper" v-else>
+            <div class="swiper-slide">
+              <img class="image" style="opacity: 0;" src="@/assets/image/content/career_wall.jpg" alt="">
             </div>
           </div>
         </div>
@@ -36,6 +41,7 @@
 export default {
   data() {
     return {
+      pageLoader: false,
       swipers: {
         portfolio: null
       },
@@ -73,7 +79,10 @@ export default {
     async getTeams() {
       const data = await this.$useapi('GET', '/v1/team/list');
       if (data && data.length > 0) {
-        this.teams = data;
+        data.forEach(elm => {
+          elm.team_name.toUpperCase() != 'УДИРДЛАГЫН АЛБА' ? this.teams.push(elm) : null;
+        });
+        // this.teams = data;
       }
     },
     initHeight() {

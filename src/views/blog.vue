@@ -12,7 +12,7 @@
       <iframe width="100%" class="iframe" :src="'https://www.youtube.com/embed/' + getId(this.blog.url)" frameborder="0" allowfullscreen></iframe>
     </div>
     <p class="bottom__line"></p>
-    <a href="javascript:;" @click="$router.push('/blogs')" class="btn-list">Жагсаалт</a>
+    <a href="javascript:;" @click="$router.push('/blogs')" class="btn-list" v-html="$textApi('list')"></a>
   </div>
 </template>
 
@@ -45,6 +45,8 @@ export default {
       const data = await this.$useapi('POST', '/v1/blog/list', {blogSeq: this.id, lang: this.lang });
       if (data && data.length > 0) {
         this.blog = data[0];
+      } else {
+        this.$router.push('/blogs');
       }
     },
     getId(url) {

@@ -20,15 +20,6 @@
           <div class="panel">
             <div>
               <ul>
-                <!-- <li>중식비 1만원 지원</li>
-                <li>사내 편의점의 다양한 간식은 언제든 무료!</li>
-                <li>업무와 개인의 성장을 위한 도서 및 교육 지원</li>
-                <li>연차/반차/반반차 그리고 남녀 모두 편하게 사용하는 월 1회 보건휴가</li>
-                <li>3/5/7년 장기근속자 휴가 및 지원금 제도</li>
-                <li>매년 5월엔 가족과 풍요로운 시간을 보내기 위한 식사비 지원</li>
-                <li>연차/반차/반반차 그리고 남녀 모두 편하게 사용하는 월 1회 보건휴가</li>
-                <li>3/5/7년 장기근속자 휴가 및 지원금 제도</li>
-                <li>매년 5월엔 가족과 풍요로운 시간을 보내기 위한 식사비 지원</li> -->
                 <li v-html="$textApi('recomm1')"></li>
                 <li v-html="$textApi('recomm2')"></li>
                 <li v-html="$textApi('recomm3')"></li>
@@ -46,7 +37,6 @@
       <img src="@/assets/image/content/blurred.jpg" alt="">
       <div class="container">
         <div class="title" v-html="$textApi('ifYouWannaSendCareer')">
-          <!-- <span>Хэрвээ анкет</span><br>илгээх бол. -->
         </div>
       </div>
     </div>
@@ -84,18 +74,8 @@
       </div>
 
       <div class="products">
-        <div class="group-flex motion-up" style="margin-top: 0px;">
-          <!-- <table>
-              <tr>
-                  <td class="active" group-id="allGroup">All</td>
-                  <td group-id="allGroup">Project manager</td>
-                  <td group-id="allGroup">Front-end</td>
-                  <td group-id="allGroup">Back-end</td>
-              </tr>
-          </table> -->
-          <div class="line-title" style="border: none;">
+        <div class="line-title" style="border: none;">
             {{this.$textApi('workplace')}}
-          </div>
         </div>
 
         <el-collapse v-model="activeNames" accordion class="career-document">
@@ -103,7 +83,7 @@
             <div class="career-document__body">
               <div class="career-document__body__title">
                 {{item.title}}
-                <a href="javascript:;" @click="$router.push('/resume')">Анкет илгээх</a>
+                <a href="javascript:;" @click="$router.push('/resume')" v-html="$textApi('sendResume')"></a>
                 <table>
                   <tr><td>{{item.created_at.substr(0, 10)}}</td><td>{{item.jobType}}</td></tr>
                 </table>

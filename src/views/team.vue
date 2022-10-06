@@ -45,7 +45,7 @@
 
           <div class="paginate">
               <div class="number">
-                  <span><span class="curr-page">{{paginate.teams.current > 9 ? paginate.teams.current : '0' + paginate.teams.current}}</span> <span class="total">/ {{paginate.teams.total > 9 ? paginate.teams.total : '0' + paginate.teams.total}}</span></span>
+                  <span><span class="curr-page">{{paginate.teams.current > 9 ? paginate.teams.current : '0' + paginate.teams.current}}</span> <span class="totalPage">/ {{paginate.teams.total > 9 ? paginate.teams.total : '0' + paginate.teams.total}}</span></span>
               </div>
               <div class="progress-bar">
                   <div class="current" :style="{'width': paginate.teams.progress + '%'}"></div>
@@ -54,37 +54,29 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="products">
-        <div class="container">
-          <div class="group-flex container motion-up" style="margin-top: 0px;">
-            <table>
-                <tr>
-                    <td @click="scrollMenu" class="active" group-id="allGroup">All</td>
-                    <td class="uppercase" v-for="(team, index) in teams" :key="index" @click="scrollMenu" :group-id="team.seq">{{team.team_name}}</td>
-                </tr>
-            </table>
-          </div>
-
-          <div>
-            <div class="swiper members" ref="membersSwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="(item, index) in employees" :key="index">
-                      <div class="curtain"></div>
-                      <img class="image" :src="$imgUrl + item.profile" alt="">
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
 
     <div class="content">
       <div class="container">
         <div class="con-width1 inner">
-          <h1 align="center">PROFILE</h1>
-            <ul class="list">
+          <div class="select-container">
+            <h1>PROFILE</h1>
+
+            <div class="total" style="">
+              <div class="select_d f-marko" @click="dialog.selectedTeam = !dialog.selectedTeam"> 
+                <p class="selected">{{selectedTeam.label}}</p>
+                <span class="down">
+                  <i class="el-icon-arrow-down"></i>
+                </span>
+              </div>
+              <ul class="select_op" v-bind:class="{'open': dialog.selectedTeam}">
+                <li @click="changeTeam(0)"><a href="javascript:;" class="a_focus f-marko black" style="font-weight: 600;">All</a></li>
+                <li v-for="(item, index) in teams" :key="'team' + index" @click="changeTeam(item)"><a href="javascript:;" class="a_focus f-marko black">{{item.team_name}}</a></li>
+              </ul>
+            </div>
+          </div>
+
+            <ul class="list" v-bind:class="{'selectedTeam' : selectedTeam.idx !== 0}">
               <li>
                 <div class="box" v-for="(item, index) in line.line1" :key="'line1' + index">
                   <figure class="img">
@@ -146,6 +138,9 @@
 export default {
   data() {
     return {
+      dialog: {
+        selectedTeam: false
+      },
       swipers: {
         teams: null,
         members: null
@@ -171,30 +166,28 @@ export default {
         line2: [],
         line3: [],
         line4: []
+      },
+      selectedTeam: {
+        idx: 0,
+        label: 'All'
       }
     }
   },
-  mounted() {
-    // this.$srollTrigger.create({
-    //     trigger: this.$refs.keyvisual,
-    //     start: "top top",
-    //     pin: true,
-    //     pinSpacing: false
-    //   });
-
-    // this.$srollTrigger.create({
-    //   trigger: this.$refs.pinned,
-    //   start: "top top",
-    //   pin: true,
-    //   pinSpacing: false,
-    //   end: 'bottom bottom'
-    // });
-  },
+  mounted() {},
   created() {
     this.getEmployee();
     this.getTeams();
   },
   methods: {
+    changeTeam(value) {
+      if (value === 0) {
+        this.selectedTeam = { idx: 0, label: 'All' };
+      } else {
+        this.selectedTeam = { idx: value.seq, label: value.team_name };
+      }
+      this.dialog.selectedTeam = false;
+      this.makeList();
+    },
     onLoadError(event) {
       event.currentTarget.src = require('@/assets/image/nouser.webp');
     },
@@ -227,17 +220,29 @@ export default {
         this.teams = data;
       }
     },
+    makeList() {
+      this.line = { line1: [], line2: [], line3: [], line4: [] };
+      let idx = 1;
+      let arr = [];
+
+      if (this.selectedTeam.idx === 0 ) {
+        arr = this.employees;
+      } else {
+        this.employees.forEach(elm => {
+          elm.team_seq === this.selectedTeam.idx ? arr.push(elm) : null;
+        });
+      }
+
+      arr.forEach(elm => {
+        this.line['line' + idx].push(elm)
+        idx === 4 ? idx = 1 : idx++;
+      });
+    },
     async getEmployee() {
       const data = await this.$useapi('GET', '/v1/employee/employees');
       if (data) {
         this.employees = data;
-        let idx = 1;
-        this.employees.forEach(elm => {
-          this.line['line' + idx].push(elm)
-          idx === 4 ? idx = 1 : idx++;
-        });
-
-        console.log(this.line);
+        this.makeList();
         this.initSwiper();
       }
     },
@@ -263,7 +268,7 @@ export default {
       this.swipers.teams = new this.$swiper(this.$refs.swiperPhotos, {
         slidesPerView: 'auto',
         spaceBetween: 30,
-        mousewheel: true,
+        // mousewheel: true,
         loop: true,
         on: {
           transitionEnd: this.swiperChanged
@@ -277,7 +282,7 @@ export default {
         this.swipers.members = new this.$swiper(this.$refs.membersSwiper, {
           slidesPerView: 'auto',
           spaceBetween: 30,
-          mousewheel: true,
+          // mousewheel: true,
           loop: true,
         });
       }, 100);

@@ -11,6 +11,10 @@
     KR: '팀',
     MN: 'Хамт олон'
   },
+  teamName: {
+    KR: '팀',
+    MN: 'Баг'
+  },
   blog: {
     KR: '블로그',
     MN: 'Блог'
@@ -186,6 +190,246 @@
   Logout: {
     KR: '로그아웃',
     MN: 'Гарах'
+  },
+  Login: {
+    KR: '로그인',
+    MN: 'Үргэлжлүүлэх'
+  },
+  waiting: {
+    KR: '잠시 기다려주세요',
+    MN: 'Түр хүлээнэ үү'
+  },
+  forgotPassword: {
+    KR: '비밀번호 찾기',
+    MN: 'Нууц үгээ мартсан?'
+  },
+  next: {
+    KR: '다음',
+    MN: 'Үргэлжлүүлэх'
+  },
+  backToLogin: {
+    KR: '로그인 페이지로 돌아가기',
+    MN: 'Нэвтрэх хэсэг рүү буцах'
+  },
+  username: {
+    KR: '사용자 아이디',
+    MN: 'Хэрэглэгчийн нэр'
+  },
+  password: {
+    KR: '비밀번호',
+    MN: 'Нууц үг'
+  },
+  mainInfo: {
+    KR: '일반 정보',
+    MN: 'Ерөнхий мэдээлэл'
+  },
+  lastname: {
+    KR: '성',
+    MN: 'Овог'
+  },
+  firstname: {
+    KR: '성함',
+    MN: 'Нэр'
+  },
+  birthdate: {
+    KR: '생년월일',
+    MN: 'Төрсөн огноо'
+  },
+  phoneNumber: {
+    KR: '연락처',
+    MN: 'Утасны дугаар'
+  },
+  registerNumber: {
+    KR: '주밍등록번호',
+    MN: 'Регистрийн дугаар'
+  },
+  emailAddress: {
+    KR: '이멜일 주소',
+    MN: 'Имэйл'
+  },
+  homeAddress:  {
+    KR: '거주 주소',
+    MN: 'Оршин сугаа хаяг'
+  },
+  FamiltyStatus: {
+    KR: '가족 사항',
+    MN: 'Гэр бүлийн байдал'
+  },
+  roleOfFamily: {
+    KR: '관계',
+    MN: 'Таны хэн болох'
+  },
+  professionName: {
+    KR: '직업/ 직장',
+    MN: 'Мэргэжил/ Ажлын байр'
+  },
+  EduStatus: {
+    KR: '학력 정보',
+    MN: 'Боловсролын талаархи мэдээлэл'
+  },
+  schoolName: {
+    KR: '학교 명',
+    MN: 'Сургуулийн нэр'
+  },
+  JobName: {
+    KR: '전공',
+    MN: 'Эзэмшсэн мэргэжил'
+  },
+  inYearSchool: {
+    KR: '입학 연도 ',
+    MN: 'Элссэн огноо'
+  },
+  outYearSchool: {
+    KR: '졸업 연도',
+    MN: 'Төгссөн огноо'
+  },
+  LanguateStatus: {
+    KR: '외국어 능력 수준',
+    MN: 'Гадаад хэлний мэдлэгийн түвшин'
+  },
+  otherLanguage: {
+    KR: '외국어',
+    MN: 'Гадаад хэл'
+  },
+  learnedYear: {
+    KR: '경력',
+    MN: 'Судалсан жил'
+  },
+  jobExperience: {
+    KR: '근무 경력',
+    MN: 'Ажлын туршлага'
+  },
+  compName: {
+    KR: '회사 명',
+    MN: 'Байгууллагын нэр'
+  },
+  jobPosition: {
+    KR: '직위',
+    MN: 'Албан тушаал'
+  },
+  inYear: {
+    KR: '입사 날짜',
+    MN: 'Орсон огноо'
+  },
+  outYear: {
+    KR: '퇴사 날짜',
+    MN: 'Гарсан огноо'
+  },
+  outReason: {
+    KR: '퇴사 사유',
+    MN: 'Гарсан шалтгаан'
+  },
+  advantage: {
+    KR: '장점',
+    MN: 'Давуу тал'
+  },
+  disAdvantage: {
+    KR: '단점',
+    MN: 'Сул тал'
+  },
+  advantageAndNo: {
+    KR: '장점과 단점',
+    MN: 'Давуу тал болон сул тал'
+  },
+  skill: {
+    KR: '실력',
+    MN: 'Ур чадвар'
+  },
+  programName: {
+    KR: '프로그램 명',
+    MN: 'Программын нэр'
+  },
+  sendResume: {
+    KR: '이력서 보내기',
+    MN: 'Анкет илгээх'
+  },
+  pleaseChoose: {
+    KR: '선택하십시오',
+    MN: 'Сонгоно уу'
+  },
+  title: {
+    KR: '제목',
+    MN: 'Гарчиг'
+  },
+  phoneOrEmail: {
+    KR: '연락처 혹은 이메일',
+    MN: 'Утас эсвэл Имэйл'
+  },
+  description: {
+    KR: '상세 내용',
+    MN: 'Дэлгэрэнгүй'
+  },
+  sendToMessage: {
+    KR: '메시지 보내기',
+    MN: 'Мессеж илгээх'
+  },
+  list: {
+    KR: '목록',
+    MN: 'Жагсаалт'
+  },
+  personalInfo: {
+    KR: '개인 정보',
+    MN: 'Хувийн мэдээлэл'
+  },
+  feedback: {
+    KR: '요청',
+    MN: 'Санал хүсэлт'
+  },
+  planOfCompany: {
+    KR: '회사 구조',
+    MN: 'Байгууллагын бүтэц'
+  },
+  skillOfProgram: {
+    KR: '프로그램 능력',
+    MN: 'Программын ур чадвар'
+  },
+  feedbackSection: {
+    KR: '요청 사항',
+    MN: 'Санал хүсэлтийн булан'
+  },
+  type: {
+    KR: '종류',
+    MN: 'Төрөл'
+  },
+  sentDate: {
+    KR: '보낸 날짜',
+    MN: 'Илгээсэн огноо'
+  },
+  sendFeedback: {
+    KR: '전송',
+    MN: 'Хүсэлт илгээх'
+  },
+  changePassword: {
+    KR: '비밀번호 변경',
+    MN: 'Нууц үг солих'
+  },
+  update: {
+    KR: '수정',
+    MN: 'Шинэчлэх'
+  },
+  save: {
+    KR: '저장',
+    MN: 'Хадгалах'
+  },
+  cancel: {
+    KR: '취소',
+    MN: 'Болих'
+  },
+  Trainee: {
+    KR: '실습생',
+    MN: 'Trainee'
+  },
+  Junior: {
+    KR: '초급',
+    MN: 'Junior'
+  },
+  MidLevel: {
+    KR: '중급',
+    MN: 'Mid Level'
+  },
+  Senior: {
+    KR: '고급',
+    MN: 'Senior'
   }
 }
 

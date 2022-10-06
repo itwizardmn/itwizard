@@ -114,11 +114,11 @@
         </el-col>
         <el-col :sm="24" :md="12">
           <div class="contact-me" style="max-width: 70%;">
-            <el-input placeholder="Нэр" v-model="subscribe.name" clearable></el-input>
-            <el-input style="margin-top: 10px;" placeholder="Гарчиг" v-model="subscribe.title" clearable></el-input>
-            <el-input style="margin-top: 10px;" placeholder="Утас эсвэл Имэйл" v-model="subscribe.phone" clearable></el-input>
-            <el-input style="margin-top: 10px;" type="textarea" rows="3" placeholder="Дэлгэрэнгүй" v-model="subscribe.description" clearable></el-input>
-            <el-button type="primary">Мессеж илгээх</el-button>
+            <el-input :placeholder="$textApi('firstname')" v-model="subscribe.name" clearable></el-input>
+            <el-input style="margin-top: 10px;" :placeholder="$textApi('title')" v-model="subscribe.title" clearable></el-input>
+            <el-input style="margin-top: 10px;" :placeholder="$textApi('phoneOrEmail')" v-model="subscribe.phone" clearable></el-input>
+            <el-input style="margin-top: 10px;" type="textarea" rows="3" :placeholder="$textApi('description')" v-model="subscribe.description" clearable></el-input>
+            <el-button type="primary" v-html="$textApi('sendToMessage')"></el-button>
           </div>
         </el-col>
       </el-row>

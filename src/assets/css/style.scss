@@ -8,7 +8,8 @@
 @import './hierarchy.scss';
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  // font-family: 'Montserrat', sans-serif;
+  font-family: "SecRobotoRegular";
   margin: 0 !important;
   overflow-x: hidden;
 }
@@ -109,6 +110,7 @@ body::-webkit-scrollbar-thumb {
     .contain {
       text-align: justify;
       // @include vw-convert-desktop(font-size, 15px);
+      line-height: 22px;
       color: #666;
     }
 
@@ -198,13 +200,30 @@ body::-webkit-scrollbar-thumb {
   }
 
 
-  [class*="con-"][class*="-width1"] {
+  [class*="con-"][class*="-width1"] {    
     max-width: 1600px;
     width: 100%;
     margin: 0 auto;
     padding: 50px 0px;
+
+    .select-container {
+      position: relative;
+      margin-bottom: 100px;
+    }
+
     h1 {
       margin-bottom: 100px;
+      text-align: center;
+
+      @include mobile {
+        text-align: left;
+        font-size: 7vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+      }
     }
     
 
@@ -275,6 +294,9 @@ body::-webkit-scrollbar-thumb {
               object-fit: cover;
             }
 
+            .og-img {
+              transition: .2s;
+            }
             .hv-img {
               opacity: 0;
               transition: .2s;
@@ -286,6 +308,7 @@ body::-webkit-scrollbar-thumb {
             left: 20px;
             bottom: 40px;
             color: #fff;
+            right: 20px;
             opacity: 0;
             transition: .2s;
             * {
@@ -305,6 +328,10 @@ body::-webkit-scrollbar-thumb {
             .hv-img {
               opacity: 1;
             }
+
+            .og-img {
+              opacity: 0;
+            }
           }
         }
 
@@ -316,6 +343,20 @@ body::-webkit-scrollbar-thumb {
 
         @include mobile {
           margin: 0
+        }
+      }
+    }
+
+    ul.list.selectedTeam {
+      li {
+        &:nth-child(1) {
+          margin-top: 0px;
+        }
+        &:nth-child(2) {
+          margin-top: 0px;
+        }
+        &:nth-child(4) {
+          margin-top: 0px;
         }
       }
     }
@@ -331,30 +372,41 @@ body::-webkit-scrollbar-thumb {
   .group-flex {
     display: flex;
     flex-direction: row;    
-    padding-left: 0;
+    // padding-left: 15%;
     @include vw-convert-desktop(margin-bottom, 20px);
     @include vw-convert-desktop(margin-top, 50px);
-    font-family: 'Montserrat', sans-serif;
+    // font-family: 'Montserrat', sans-serif;
+    font-family: "SecRobotoRegular";
+    width: 70%;
+    margin: auto;
+    @include mobile {
+      width: 100%;
+      padding-left: 7.5%;
+    }
     table {
       border-collapse: separate;
-      @include vw-convert-desktop(border-spacing, 10px);
+      // @include vw-convert-desktop(border-spacing, 10px);
+      border-spacing: 10px;
       max-width: 100vw;
       display: block;
       overflow-x: auto;
       @include mobile {
-        // @include vw-convert-mobile(border-spacing, 10px);
+        border-spacing: 5px;
         @include vw-convert-mobile(margin-top, 50px);
       }
       td {
         @include vw-convert-desktop(font-size, 16px);
         color: #000;
         font-weight: 700;
-        @include vw-convert-desktop(padding, 5px 10px);
+        // @include vw-convert-desktop(padding, 5px 10px);
+        padding: 5px 15px;
         cursor: pointer;
         white-space: nowrap;
+        border: 1px solid #000;
         @include mobile {
           @include vw-convert-mobile(font-size, 20px);
-          @include vw-convert-mobile(padding, 5px 10px);
+          // @include vw-convert-mobile(padding, 5px 10px);
+          padding: 5px 15px;
         }
       }
 
@@ -370,6 +422,11 @@ body::-webkit-scrollbar-thumb {
   }
 
   .portfolioSwipe {
+    padding-bottom: 50px;
+
+    span.swiper-pagination-bullet {
+      background-color: #000;
+    }
     .swiper-wrapper {
       height: auto;
       .swiper-slide {
@@ -436,10 +493,14 @@ body::-webkit-scrollbar-thumb {
   //     padding-left: 7.5%;
   //   }
   // }
+  
   .portfolioSwipe.main {
-    width: 100%;
+    padding-left: 15%;
+
+    @include mobile {
+      padding-left: 8.5%;
+    }
     .swiper-wrapper {
-      padding-left: 15%;
       width: 100%;
       .swiper-slide {
         width: 30vw !important; 
@@ -635,6 +696,34 @@ body::-webkit-scrollbar-thumb {
       @include vw-convert-desktop(height, 500px);
       object-fit: cover;
     }
+
+    .swiper-button-next {
+      color: #c2c2c2;
+      margin-right: 20px;
+      &::after {
+        content: ' ';
+        display: inline-block;
+        border-bottom: 1px solid #c2c2c2;
+        border-right: 1px solid #c2c2c2;
+        height: 27px;
+        width: 44px;
+        transform: rotate(-45deg);
+      }
+    }
+
+    .swiper-button-prev {
+      color: #c2c2c2;
+      margin-left: 20px;
+      &::after {
+        content: ' ';
+        display: inline-block;
+        border-bottom: 1px solid #c2c2c2;
+        border-right: 1px solid #c2c2c2;
+        height: 27px;
+        width: 44px;
+        transform: rotate(135deg);
+      }
+    }
   }
 }
 
@@ -744,6 +833,118 @@ body::-webkit-scrollbar-thumb {
         }
       }
     }
+
+
+
+    .total {
+      cursor: pointer;
+      display: block;
+      margin-right: 10px;
+      width: 150px;
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      @include mobile {
+        width: 50%;
+      }
+      .select_d {
+        .selected {
+          margin: 0;
+          margin-left: 10px;
+          width: 80%;
+          overflow: hidden;
+        }
+          width: 100%;
+          line-height: 35px;
+          height: 35px;
+          // padding: 0px 13px;
+          position: relative;
+          font-size: 12px;
+          text-align: left;
+          color: #000;
+          border: 1px solid #cccccc;
+          overflow: hidden;
+
+          i {
+            position: absolute;
+            width: 11px;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+      }
+
+      .select_d.name {
+        p {
+          margin: 0;
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden !important;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .f-marko {
+        color: #000;
+      }
+
+      .f-marko.black {
+        color: #000;
+      }
+
+      .select_op {
+        width: 100%;
+        margin-top: 0px;
+        display: none;
+        position: absolute;
+        z-index: 3;
+        background: #fff;
+        font-size: 11px;
+        top: 39px;
+        padding: 0px 0;
+        border: 1px solid #ccc;
+        margin: 0;
+        list-style: none;
+        color: #666;
+        line-height: 1.5;
+        overflow: hidden;
+        overflow-y: auto;
+        max-height: 200px;
+
+        &::-webkit-scrollbar {
+          width: 2px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #000;
+      }
+
+
+        li {
+          line-height: 26px;
+          height: 26px;
+          border: 0px solid red;
+          padding: 5px;
+          padding-left: 13px;
+          text-align: left;
+          width: 100%;
+
+          a {
+            text-decoration: none;
+            font-weight: 500;
+          }
+
+          &:hover {
+            background-color: #f5f5f5;;
+          }
+        }
+      }
+      .select_op.open {
+        display: block;
+      }
+    }
+
   }
 
   .line-title {
@@ -787,7 +988,8 @@ body::-webkit-scrollbar-thumb {
   .el-input__inner, .el-textarea__inner {
     border: 1px solid #8c8c8c !important;
     border-radius: 1px !important;
-    font-family: 'Montserrat', sans-serif;
+    // font-family: 'Montserrat', sans-serif;
+    font-family: "SecRobotoRegular";
   }
 
   button {
@@ -796,7 +998,8 @@ body::-webkit-scrollbar-thumb {
     border: 1px solid #1a1a1a;
     border-radius: 1px !important;
     padding: 15px 30px;
-    font-family: 'Montserrat', sans-serif;
+    // font-family: 'Montserrat', sans-serif;
+    font-family: "SecRobotoRegular";
   }
 
   button:hover, button:focus {
@@ -873,7 +1076,8 @@ body::-webkit-scrollbar-thumb {
       background-color: transparent !important;
       color: #000;
       border: 1px solid black;
-      font-family: 'Montserrat', sans-serif;
+      // font-family: 'Montserrat', sans-serif;
+      font-family: "SecRobotoRegular";
       margin-top: 20px;
       @include vw-convert-desktop(margin-left, 200px);
     }
@@ -965,7 +1169,7 @@ body::-webkit-scrollbar-thumb {
           font-weight: 700;
           font-size: 15px;
 
-          .total{
+          .totalPage{
             color: #c2c2c2;
           }
         }
@@ -1090,6 +1294,10 @@ body::-webkit-scrollbar-thumb {
   img {
     width: 100%;
     height: auto;
+
+    @include mobile {
+      margin-top: 80px;
+    }
   }
 
   .title {
@@ -1275,19 +1483,24 @@ body::-webkit-scrollbar-thumb {
   @include vw-convert-desktop(margin-bottom, 100px);
 
   @include mobile {
-    @include vw-convert-mobile(margin-bottom, 100px);
+    @include vw-convert-mobile(margin-bottom, 200px);
   }
   input, textarea {
-    font-family: 'Montserrat', sans-serif;
+    // font-family: 'Montserrat', sans-serif;
+    font-family: "SecRobotoRegular";
     @include vw-convert-desktop(font-size, 13px);
 
     @include mobile {
-      @include vw-convert-mobile(font-size, 13px);
+      @include vw-convert-mobile(font-size, 14px);
     }
   }
   .box-card {
     @include vw-convert-desktop(font-size, 16px);
     @include vw-convert-desktop(margin-top, 20px);
+
+    @include mobile {
+      @include vw-convert-mobile(font-size, 16px);
+    }
 
     .group-name {
       font-weight: 500;
@@ -1340,15 +1553,16 @@ body::-webkit-scrollbar-thumb {
   &__container {
     border-radius: 20px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 1px 10px 0 rgba(0, 0, 0, 0.1);
-    @include vw-convert-desktop(margin-top, 200px);
+    margin: 200px auto;
     // @include vw-convert-desktop(width, 800px);
     max-width: 350px;
     width: 350px;
-    margin: auto;
     padding: 30px 50px;
 
     @include mobile {
       width: 100%;
+      margin-top: 50%;
+      padding: 0;
     }
 
     img {
@@ -1425,10 +1639,11 @@ body::-webkit-scrollbar-thumb {
   min-height: 100vh;
 
   .personal {
-    @include vw-convert-desktop(margin-top, 100px);
+    // @include vw-convert-desktop(margin-top, 100px);
+    margin-top: 100px;
     @include mobile {
-      // @include vw-convert-mobile(margin-top, 100px);
-      margin-top: 100px;
+      @include vw-convert-mobile(margin-top, 150px);
+      // margin-top: 150px;
     }
 
     .avatar-container {
@@ -1601,11 +1816,12 @@ body::-webkit-scrollbar-thumb {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 10px;
-    @include vw-convert-desktop(margin-top, 100px);
+    // @include vw-convert-desktop(margin-top, 100px);
 
+    margin-top: 100px;
     @include mobile {
       grid-template-columns: 1fr;
-      @include vw-convert-desktop(margin-top, 50px);
+      @include vw-convert-mobile(margin-top, 50px);
     }
 
     &__btn {
@@ -1738,6 +1954,7 @@ body::-webkit-scrollbar-thumb {
 
   .content {
     margin-top: 50px;
+    text-align: justify;
     p {
       font-weight: 400;
       font-size: 13px;

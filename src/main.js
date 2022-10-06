@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import "@/assets/css/style.scss"
-import SwiperCore, { Swiper, Mousewheel } from 'swiper';
+import SwiperCore, { Swiper, Mousewheel, Pagination, Navigation } from 'swiper';
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -64,13 +64,13 @@ import {Chart,ArcElement,
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CSSPlugin);
 
-SwiperCore.use([Mousewheel])
+SwiperCore.use([Mousewheel, Navigation, Pagination])
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/en'
 
-const url = 'http://192.168.0.155:5100';
-const imgUrl = 'http://192.168.0.155:5100/v2/common/download/';
+const url = 'http://192.168.0.46:5100';
+const imgUrl = 'http://192.168.0.46:5100/v2/common/download/';
 axios.defaults.baseURL = url;
 
 const detectIP = async () => {
@@ -106,8 +106,6 @@ const detectIP = async () => {
 
       return result;
   }
-
-  
 }
 
 const token = localStorage.getItem('token');
@@ -122,7 +120,11 @@ const useapi = async (method, url, data) => {
       url: url,
       data
   }).then(data => {
-    return data;
+    if (data.status === 200) {
+      return data;
+    } else {
+      return 204;
+    }
   }).catch(err => {
     console.log(err);
     return false;
@@ -132,6 +134,10 @@ const useapi = async (method, url, data) => {
     return false;
   }
 
+  if (response === 204) {
+    return 204;
+  }
+  
   return response.data.data ? response.data.data : true;
 };
 

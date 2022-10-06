@@ -50,7 +50,7 @@ $size--mobile: 720;
 }
 
 @mixin mobile {
-  @media only screen and (max-width:720px) {
+  @media only screen and (max-width:980px) {
     @content;
   }
 }

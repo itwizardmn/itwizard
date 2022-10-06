@@ -1,6 +1,6 @@
 ﻿<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div>
+  <div style="overflow-x: hidden;">
     <div class="keyVisual">
       <div class="swiper">
         <div class="swiper-wrapper">
@@ -12,33 +12,16 @@
             <video autoplay muted loop>
               <source src="@/assets/video/video.mp4">
             </video>
-            <!-- <div style="pointer-events: none;">
-              <iframe 
-              src="https://player.vimeo.com/video/755132568?h=376a3d1235&amp;autoplay=1&amp;loop=1&amp;title=0&amp;sidedock=0&amp;autopause=0&amp;app_id=58479" 
-              frameborder="0" 
-              allow="autoplay; fullscreen;" 
-              allowfullscreen 
-              style="position:absolute;top:0;left:0;width:100%;height:100%;">
-              </iframe>
-            </div> -->
           </div>
-          <!-- <div class="swiper-slide">Slide 2</div>
-          <div class="swiper-slide">Slide 3</div> -->
         </div>
       </div>
     </div>
 
     <div class="about container">
-      <!-- <router-link to="/about">
-      <div class="bck-container">
-        <p>about</p>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M502.6 278.6l-128 128c-12.51 12.51-32.76 12.49-45.25 0c-12.5-12.5-12.5-32.75 0-45.25L402.8 288H32C14.31 288 0 273.7 0 255.1S14.31 224 32 224h370.8l-73.38-73.38c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l128 128C515.1 245.9 515.1 266.1 502.6 278.6z"/></svg>
-      </div></router-link> -->
       <div class="text-container">
         <div class="col">
           <div class="name" v-html="$textApi('weAreWanna')"></div>
           <div class="title">
-            <!-- Бид хөгжүүлэгчээс юу хүсдэг вэ? -->
           </div>
           <div class="contain" v-html="$textApi('weAreWannaText')">
           </div>
@@ -46,7 +29,6 @@
         <div class="col">
           <div class="name">{{this.$textApi('about')}}</div>
           <div class="title">
-            <!-- Бидний тухай -->
           </div>
           <div class="contain" v-html="$textApi('aboutText')">
           </div>
@@ -55,11 +37,11 @@
     </div>
 
     <div class="products">
-      <div class="group-flex container motion-up">
+      <div class="group-flex motion-up">
           <table>
               <tr>
-                  <td @click="scrollMenu" class="active" group-id="0">All</td>
-                  <td class="uppercase" v-for="(team, index) in teams" :key="index" @click="scrollMenu" :group-id="team.seq">{{team.team_name}}</td>
+                  <td @click="scrollMenu" class="active" group-id="0">#All</td>
+                  <td class="uppercase" v-for="(team, index) in teams" :key="index" @click="scrollMenu" :group-id="team.seq">#{{team.team_name}}</td>
               </tr>
           </table>
       </div>
@@ -75,6 +57,7 @@
             </div>
           </div>
         </div>
+        <div class="swiper-pagination"></div>
       </div>
     </div>
 
@@ -116,6 +99,8 @@
                   <img class="image" src="http://itwizard.mn/client/static/image/slider/5.jfif" alt="">
               </div>
           </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
       </div>
     </div>
   </div>
@@ -177,7 +162,9 @@ export default {
     async getTeams() {
       const data = await this.$useapi('GET', '/v1/team/list');
       if (data && data.length > 0) {
-        this.teams = data;
+        data.forEach(elm => {
+          elm.team_name.toUpperCase() != 'УДИРДЛАГЫН АЛБА' ? this.teams.push(elm) : null;
+        });
       }
     },
     initSwiperInterval() {
@@ -195,13 +182,19 @@ export default {
       this.swipers.portfolio = new this.$swiper(this.$refs.swiper, {
         slidesPerView: 'auto',
         spaceBetween: 30,
-        mousewheel: true
+        pagination: {
+          el: ".swiper-pagination",
+          dynamicBullets: true,
+        }
       });
 
       this.swipers.photos = new this.$swiper(this.$refs.swiperPhotos, {
         slidesPerView: 'auto',
         spaceBetween: 30,
-        mousewheel: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
         loop: true,
         on: {
           transitionEnd: this.swiperChanged
@@ -241,7 +234,10 @@ export default {
         this.swipers.portfolio = new this.$swiper(this.$refs.swiper, {
           slidesPerView: 'auto',
           spaceBetween: 30,
-          mousewheel: true,
+          pagination: {
+            el: ".swiper-pagination",
+            dynamicBullets: true
+          }
         });
       }, 5);
     },
