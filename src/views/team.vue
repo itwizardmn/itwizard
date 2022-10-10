@@ -22,23 +22,23 @@
               <div class="swiper-wrapper">
                   <div class="swiper-slide">
                       <div class="curtain"></div>
-                      <img class="image" src="http://itwizard.mn/client/static/image/slider/3.jpg" alt="">
+                      <img class="image" src="@/assets/image/content/slider/10.jpg" alt="">
                   </div>
                   <div class="swiper-slide">
                       <div class="curtain"></div>
-                      <img class="image" src="http://itwizard.mn/client/static/image/slider/4.jpg" alt="">
+                      <img class="image" src="@/assets/image/content/slider/15.jpg" alt="">
                   </div>
                   <div class="swiper-slide">
                       <div class="curtain"></div>
-                      <img class="image" src="http://itwizard.mn/client/static/image/slider/1.jfif" alt="">
+                      <img class="image" src="@/assets/image/content/slider/13.jpg" alt="">
                   </div>
                   <div class="swiper-slide">
                       <div class="curtain"></div>
-                      <img class="image" src="http://itwizard.mn/client/static/image/slider/2.jpg" alt="">
+                      <img class="image" src="@/assets/image/content/slider/14.jpg" alt="">
                   </div>
                   <div class="swiper-slide">
                       <div class="curtain"></div>
-                      <img class="image" src="http://itwizard.mn/client/static/image/slider/5.jfif" alt="">
+                      <img class="image" src="@/assets/image/content/slider/11.jpg" alt="">
                   </div>
               </div>
           </div>

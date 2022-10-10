@@ -693,7 +693,7 @@ body::-webkit-scrollbar-thumb {
   .swiperPhotos {
     img {
       width: 100%;
-      @include vw-convert-desktop(height, 500px);
+      @include vw-convert-desktop(height, 600px);
       object-fit: cover;
     }
 

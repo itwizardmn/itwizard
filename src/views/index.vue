@@ -80,23 +80,23 @@
           <div class="swiper-wrapper">
               <div class="swiper-slide">
                   <div class="curtain"></div>
-                  <img class="image" src="http://itwizard.mn/client/static/image/slider/3.jpg" alt="">
+                  <img class="image" src="@/assets/image/content/slider/1.jpg" alt="">
               </div>
               <div class="swiper-slide">
                   <div class="curtain"></div>
-                  <img class="image" src="http://itwizard.mn/client/static/image/slider/4.jpg" alt="">
+                  <img class="image" src="@/assets/image/content/slider/2.jpg" alt="">
               </div>
               <div class="swiper-slide">
                   <div class="curtain"></div>
-                  <img class="image" src="http://itwizard.mn/client/static/image/slider/1.jfif" alt="">
+                  <img class="image" src="@/assets/image/content/slider/3.jpg" alt="">
               </div>
               <div class="swiper-slide">
                   <div class="curtain"></div>
-                  <img class="image" src="http://itwizard.mn/client/static/image/slider/2.jpg" alt="">
+                  <img class="image" src="@/assets/image/content/slider/4.jpg" alt="">
               </div>
               <div class="swiper-slide">
                   <div class="curtain"></div>
-                  <img class="image" src="http://itwizard.mn/client/static/image/slider/5.jfif" alt="">
+                  <img class="image" src="@/assets/image/content/slider/5.jpg" alt="">
               </div>
           </div>
           <div class="swiper-button-next"></div>
