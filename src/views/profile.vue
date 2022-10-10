@@ -350,8 +350,8 @@
                     <el-table-column>
                       <template slot-scope="scope">
                       <el-tag v-if="scope.row.status == 'pending'" size="mini">Sent</el-tag>
-                      <el-tag v-else-if="scope.row.status == 'accepted'" size="mini" type="success">Resolved</el-tag>
-                      <el-tag v-else-if="item.status == 'returned'" size="mini" type="warning">Returned</el-tag>
+                      <el-tag v-else-if="scope.row.status == 'resolved'" size="mini" type="success">Resolved</el-tag>
+                      <el-tag v-else-if="scope.row.status == 'returned'" size="mini" type="warning">Returned</el-tag>
                     </template>
                     </el-table-column>
                   </el-table>

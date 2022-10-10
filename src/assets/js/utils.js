@@ -430,6 +430,10 @@
   Senior: {
     KR: '고급',
     MN: 'Senior'
+  },
+  signin: {
+    KR: '로그인',
+    MN: 'Нэвтрэх'
   }
 }
 

@@ -69,8 +69,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/en'
 
-const url = 'http://192.168.0.46:5100';
-const imgUrl = 'http://192.168.0.46:5100/v2/common/download/';
+// const url = 'http://192.168.0.46:5100';
+// const imgUrl = 'http://192.168.0.46:5100/v2/common/download/';
+const url = 'http://api.itwizard.mn';
+const imgUrl = 'http://api.itwizard.mn/v2/common/download/';
 axios.defaults.baseURL = url;
 
 const detectIP = async () => {
