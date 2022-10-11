@@ -7,9 +7,10 @@
             <td @click="changeType" data=1>#{{getText('blog')}}</td>
             <td @click="changeType" data=2>#{{getText('news')}}</td>
             <td @click="changeType" data=3>#{{getText('talking')}}</td>
+            <td @click="changeType" data=4>#Youtube</td>
         </tr>
     </table>
-      <ul class="banner-link">
+      <ul class="banner-link" ref="localBlog">
         <li v-for="(item, index) in blogFilter" :key="'blog' + index">
           <p class="itwizard">itwizard</p>
           <router-link :to="'/blog/' + item.blog_seq">
@@ -19,6 +20,28 @@
 				</router-link>
 				</li>
 		</ul>
+    <ul class="banner-link" ref="youtube" style="display: none;">
+        <li v-for="(item, index) in youtube.list" :key="'blog' + index" class="ytb-container">
+          <div class="ytb-thumbnail">
+            <div class="curtain"></div>
+            <img src="@/assets/image/content/playBtn.png" @click="playVideo(item)" class="play-btn" title="play-btn">
+            <img :src="item.snippet.thumbnails.high.url" title="">
+          </div>
+          <h3>{{item.snippet.title}}</h3>
+				</li>
+		</ul>
+
+    <div class="ytb-dialog" v-bind:class="{ 'open': dialog.iframe }">
+      <div class="content">
+        <a href="javascript:;" class="close-btn" @click="closeDialog">
+          <i class="el-icon-close"></i>
+        </a>
+
+        <div style="height: 100%;">
+          <iframe v-if="youtube.selected" width="100%" class="iframe" :src="'https://www.youtube.com/embed/' + youtube.selected.id.videoId" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
     </div>
 </template>
 
@@ -26,9 +49,18 @@
 export default {
   data() {
     return {
+      dialog: {
+        iframe: false
+      },
       blogs: [],
       conType: 0,
-      lang: null
+      lang: null,
+      youtube: {
+        apiKey: 'AIzaSyA2JKlRDMjUIO7YSg0iTn6vCvb_dkcBr1E',
+        channelId: 'UC8CFyKbS5Vcv0V-cAkpdRFw',
+        selected: null,
+        list: []
+      }
     }
   },
   computed: {
@@ -52,8 +84,23 @@ export default {
       this.lang = await this.$detectip();
     }
     this.getBlogs();
+    this.getYoutubeVideos();
   },
   methods: {
+    closeDialog() {
+      this.youtube.selected = null;
+      this.dialog.iframe = false;
+    },
+    playVideo(item) {
+      this.youtube.selected = item;
+      this.dialog.iframe = true;
+    },
+    async getYoutubeVideos() {
+      const data = await this.$useapi('GET', '/v1/blog/get-youtube-videos');
+      if(data) {
+        this.youtube.list = data.items;
+      }
+    },
     getText(text) {
         return this.$textApi(text);
     },
@@ -76,10 +123,19 @@ export default {
     changeType(event) {
       let elm = event.currentTarget;
       const idx = elm.getAttribute('data');
-      if (idx) {
-        this.conType = Number(idx);
+
+      if (idx > 3) {
+        this.$refs.youtube.style.display = 'grid';
+        this.$refs.localBlog.style.display = 'none';
       } else {
-        this.conType = 0;
+        this.$refs.youtube.style.display = 'none';
+        this.$refs.localBlog.style.display = 'grid';
+
+        if (idx) {
+          this.conType = Number(idx);
+        } else {
+          this.conType = 0;
+        }
       }
 
       const arr = this.$refs.menu.querySelectorAll('td');
@@ -87,7 +143,7 @@ export default {
         el.classList.remove('active');
       });
       event.currentTarget.classList.add('active');
-      this.move(event.currentTarget);
+      this.move(event.currentTarget); 
     },
     async getBlogs() {
       const data = await this.$useapi('POST', '/v1/blog/list', { lang: this.lang });
