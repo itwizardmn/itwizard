@@ -25,9 +25,9 @@
           <div class="ytb-thumbnail">
             <div class="curtain"></div>
             <img src="@/assets/image/content/playBtn.png" @click="playVideo(item)" class="play-btn" title="play-btn">
-            <img :src="item.snippet.thumbnails.high.url" title="">
+            <img :src="item.thumbnail" title="">
           </div>
-          <h3>{{item.snippet.title}}</h3>
+          <h3>{{item.title}}</h3>
 				</li>
 		</ul>
 
@@ -38,7 +38,7 @@
         </a>
 
         <div style="height: 100%;">
-          <iframe v-if="youtube.selected" width="100%" class="iframe" :src="'https://www.youtube.com/embed/' + youtube.selected.id.videoId" frameborder="0" allowfullscreen></iframe>
+          <iframe v-if="youtube.selected" width="100%" class="iframe" :src="'https://www.youtube.com/embed/' + youtube.selected.video_id" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -96,9 +96,10 @@ export default {
       this.dialog.iframe = true;
     },
     async getYoutubeVideos() {
+      console.log('=asdfasdf');
       const data = await this.$useapi('GET', '/v1/blog/get-youtube-videos');
       if(data) {
-        this.youtube.list = data.items;
+        this.youtube.list = data;
       }
     },
     getText(text) {
