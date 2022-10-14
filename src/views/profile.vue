@@ -797,7 +797,7 @@ export default {
         },
         skill: [
           {
-            programm: [{required: true, message: this.$textApi('programName')}],
+            programm: [{required: true, message: this.$textApi('programName'), pattern: /^[a-zA-Z.]{1,}$/}],
             level: [{required: true, message: this.$textApi('pleaseChoose')}],
             year: [{required: true, message: this.$textApi('learnedYear'),  pattern: /^\d+$/}]
           }
@@ -1101,7 +1101,7 @@ export default {
     },
     addSkill() {
       this.userInfo.skill.push({programm: '',level: '',year: ''});
-      this.regx.skill.push({programm: [{required: true, message: 'Программын нэр'}],level: [{required: true, message: 'Түвшин'}],year: [{required: true, message: 'Судалсан жил',  pattern: /^[0-9]{1,}$/}]});
+      this.regx.skill.push({programm: [{required: true, message: this.$textApi('programName'), pattern: /^[a-zA-Z.]{1,}$/}],level: [{required: true, message: 'Түвшин'}],year: [{required: true, message: 'Судалсан жил',  pattern: /^[0-9]{1,}$/}]});
     },
     addLanguage() {
       this.userInfo.lang.push({language: '',percent: '',year: ''});

@@ -85,22 +85,22 @@
           <el-row :gutter="20" v-for="(item, idx) in userInfo.family" :key="idx">
             <el-col :sm="24" :md="5">
               <el-form-item>
-                <el-input :placeholder="$textApi('roleOfFamily') + ' *'" v-model="item.role" clearable></el-input>
+                <el-input :placeholder="$textApi('roleOfFamily')" v-model="item.role" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="5">
               <el-form-item>
-                <el-input :placeholder="$textApi('firstname') + ' *'" v-model="item.name" clearable></el-input>
+                <el-input :placeholder="$textApi('firstname')" v-model="item.name" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="8">
               <el-form-item>              
-                <el-input :placeholder="$textApi('professionName') + ' *'" v-model="item.profession" clearable></el-input>
+                <el-input :placeholder="$textApi('professionName')" v-model="item.profession" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
               <el-form-item>
-                <el-date-picker style="width: 100%" v-model="item.birthdate" type="date" :picker-options="pickerOptions.disable" :placeholder="$textApi('birthdate') + ' *'"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.birthdate" type="date" :picker-options="pickerOptions.disable" :placeholder="$textApi('birthdate')"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="2">
@@ -181,27 +181,27 @@
           <el-row :gutter="20" v-for="(item, idx) in userInfo.experience" :key="idx">
             <el-col :sm="24" :md="5">
               <el-form-item>
-                <el-input :placeholder="$textApi('compName') + ' *'" v-model="item.company" clearable></el-input>
+                <el-input :placeholder="$textApi('compName')" v-model="item.company" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="5">
               <el-form-item>
-                <el-input :placeholder="$textApi('jobPosition') + ' *'" v-model="item.profession" clearable></el-input>
+                <el-input :placeholder="$textApi('jobPosition')" v-model="item.profession" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
               <el-form-item>
-                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" :picker-options="pickerOptions.disable" :placeholder="$textApi('inYear') + ' *'"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.inYear" type="date" :picker-options="pickerOptions.disable" :placeholder="$textApi('inYear')"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
               <el-form-item align="left">
-                <el-date-picker style="width: 100%" v-model="item.outYear" type="date" :picker-options="getPickerOpt(item)" :placeholder="$textApi('outYear') + ' *'"></el-date-picker>
+                <el-date-picker style="width: 100%" v-model="item.outYear" type="date" :picker-options="getPickerOpt(item)" :placeholder="$textApi('outYear')"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="4">
               <el-form-item align="left">
-                <el-input :placeholder="$textApi('outReason') + ' *'" v-model="item.outReason" clearable></el-input>
+                <el-input :placeholder="$textApi('outReason')" v-model="item.outReason" clearable></el-input>
               </el-form-item>
             </el-col>
             <el-col :sm="24" :md="2">
@@ -358,7 +358,7 @@ export default {
         },
         skill: [
           {
-            programm: [{required: true, message: this.$textApi('programName')}],
+            programm: [{required: true, message: this.$textApi('programName'), pattern: /^[a-zA-Z.]{1,}$/}],
             level: [{required: true, message: this.$textApi('pleaseChoose')}],
             year: [{required: true, message: this.$textApi('learnedYear'),  pattern: /^\d+$/}]
           }
@@ -397,7 +397,7 @@ export default {
     },
     addSkill() {
       this.userInfo.skill.push({programm: '',level: '',year: ''});
-      this.regx.skill.push({programm: [{required: true, message: this.$textApi('programName')}],level: [{required: true, message: this.$textApi('pleaseChoose')}],year: [{required: true, message: this.$textApi('learnedYear'),  pattern: /^\d+$/}]});
+      this.regx.skill.push({programm: [{required: true, message: this.$textApi('programName'), pattern: /^[a-zA-Z.]{1,}$/}],level: [{required: true, message: this.$textApi('pleaseChoose')}],year: [{required: true, message: this.$textApi('learnedYear'),  pattern: /^\d+$/}]});
     },
     submitForm() {
       this.$refs.resumeFrom.validate((valid) => {
