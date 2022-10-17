@@ -130,7 +130,7 @@
               </li>
             </ul>
             <ul class="list mobile" v-bind:class="{'selectedTeam' : selectedTeam.idx !== 0}">
-              <li v-for="(item, index) in employees" :key="'line1' + index">
+              <li v-for="(item, index) in filterEmployee" :key="'line1' + index">
                 <div class="box">
                   <figure class="img">
                     <div class="og-img"><img :src="$imgUrl + item.photo" :alt="item.name" @error="onLoadError"></div>
@@ -191,6 +191,20 @@ export default {
   created() {
     this.getEmployee();
     this.getTeams();
+  },
+  computed: {
+    filterEmployee() {
+      var arr = [];
+
+      if (this.selectedTeam.idx === 0) {
+        return this.employees;
+      } else {
+        this.employees.forEach(elm => {
+          elm.team_seq === this.selectedTeam.idx ? arr.push(elm) : null;
+        });
+      }
+      return arr;
+    }
   },
   methods: {
     changeTeam(value) {
