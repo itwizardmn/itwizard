@@ -76,7 +76,7 @@
             </div>
           </div>
 
-            <ul class="list" v-bind:class="{'selectedTeam' : selectedTeam.idx !== 0}">
+            <ul class="list pc" v-bind:class="{'selectedTeam' : selectedTeam.idx !== 0}">
               <li>
                 <div class="box" v-for="(item, index) in line.line1" :key="'line1' + index">
                   <figure class="img">
@@ -118,6 +118,20 @@
 
               <li>
                 <div class="box" v-for="(item, index) in line.line4" :key="'line4' + index">
+                  <figure class="img">
+                    <div class="og-img"><img :src="$imgUrl + item.photo" :alt="item.name" @error="onLoadError"></div>
+                    <div class="hv-img"><img :src="$imgUrl + item.profile" :alt="item.name" @error="onLoadError"></div>
+                  </figure>
+                  <div class="text">
+                    <strong class="jobs ">{{item.pro_name}}</strong><br>
+                    <span class="name">{{item.name}}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <ul class="list mobile" v-bind:class="{'selectedTeam' : selectedTeam.idx !== 0}">
+              <li v-for="(item, index) in employees" :key="'line1' + index">
+                <div class="box">
                   <figure class="img">
                     <div class="og-img"><img :src="$imgUrl + item.photo" :alt="item.name" @error="onLoadError"></div>
                     <div class="hv-img"><img :src="$imgUrl + item.profile" :alt="item.name" @error="onLoadError"></div>

@@ -246,14 +246,14 @@ body::-webkit-scrollbar-thumb {
         }
 
         &:nth-child(1) {
-          margin-top: 280px;
+          margin-top: 0;
 
           @include mobile {
             margin-top: 0;
           }
         }
         &:nth-child(2) {
-          margin-top: 150px;
+          margin-top: 100px;
 
           @include mobile {
             margin-top: 0;
@@ -344,6 +344,19 @@ body::-webkit-scrollbar-thumb {
         @include mobile {
           margin: 0
         }
+      }
+    }
+
+    ul.list.pc {
+      @include mobile {
+        display: none;
+      }
+    }
+
+    ul.list.mobile {
+      display: none;
+      @include mobile {
+        display: flex;
       }
     }
 
