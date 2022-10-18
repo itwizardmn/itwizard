@@ -90,45 +90,39 @@
               </div>
 
               <div class="career-document__body__container">
-                <div class="career-document__body__container__title">
-                  ITWIZARD-ын тухай
+                <div class="career-document__body__container__title" v-text="$textApi('aboutItwizard')">
                 </div>
-                <div class="career-document__body__container__desc">
-                  <strong>ITWIZARD</strong> ХХК нь 2016 оноос эхлэн Солонгос улсын Мэдээлэл технологийн компаниудтай хамтран ажиллаж байгаа ба дотоодын зах зээлээс хараат бус ажиллаж байгаа болно. Мэдээлэл, технологийн чиглэлээр олон жил ажилласан туршлагатай хамт олон бүрдүүлэн үйл ажиллагаагаа явуулж байгаа бөгөөд 2022 онд 150 хөгжүүлэгчтэй болох зорилго тавин ажиллаж байна. 
+                <div class="career-document__body__container__desc" v-html="$textApi('aboutCareer')">
                 </div>
 
-                <div class="career-document__body__container__title">
-                  Тавигдах шаардлага
+                <div class="career-document__body__container__title" v-html="$textApi('employeeRequirment')">
                 </div>
                 <div class="career-document__body__container__desc" v-html="item.requirement"></div>
-                <div class="career-document__body__container__title">
-                  Гүйцэтгэх үүрэг
+                <div class="career-document__body__container__title" v-html="$textApi('employeeRole')">
                 </div>
                 <div class="career-document__body__container__desc" v-html="item.roles"></div>
-                <div class="career-document__body__container__title">
-                  Нэмэлт мэдээлэл
+                <div class="career-document__body__container__title" v-html="$textApi('addInformation')">
                 </div>
                 <div class="career-document__body__container__desc" v-html="item.about"></div>
 
-                <div class="career-document__body__container__title">
-                  Бусад мэдээлэл
+                <div class="career-document__body__container__title" v-html="$textApi('otherInformation')">
                 </div>
                 <div class="career-document__body__container__desc">
                   <table>
                     <tr>
-                      <td>Салбар</td>
-                      <td>Мэдээлэл технологи, Харилцаа холбоо</td>
+                      <td v-text="$textApi('courseAction')"></td>
+                      <td v-text="$textApi('courseActionName')"></td>
                     </tr>
                     <tr>
-                      <td>Түвшин</td>
+                      <td v-text="$textApi('empLevels')"></td>
                       <td>{{item.levels}}</td>
                     </tr>
                     <tr>
-                      <td>Төрөл</td>
+                      <td v-text="$textApi('type')"></td>
                       <td>{{item.jobType}}</td>
                     </tr>
                     <tr>
-                      <td>Цалин</td>
+                      <td v-text="$textApi('salary')"></td>
                       <td>{{item.salary}}</td>
                     </tr>
                   </table>
@@ -146,10 +140,17 @@ export default {
   data() {
     return {
       activeNames: '',
-      ads: []
+      ads: [],
+      lang: null
     }
   },
-  created() {
+  async created() {
+    const lan = localStorage.getItem('lang');
+    if (lan) {
+      this.lang = lan;
+    } else {
+      this.lang = await this.$detectip();
+    }
     this.getCareers();
   },
   mounted() {
@@ -170,7 +171,7 @@ export default {
   },
   methods: {
     async getCareers() {
-      const data = await this.$useapi('POST', '/v1/team/get-career');
+      const data = await this.$useapi('POST', '/v1/team/get-career', { lang: this.lang });
       if (data && data.length > 0) {
         this.ads = data;
       }      

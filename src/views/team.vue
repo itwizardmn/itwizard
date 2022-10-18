@@ -222,7 +222,6 @@ export default {
     move(target) {
       target.classList.add('active');
       let middle = window.innerWidth / 3;
-      
       let targetEl = target.closest('table');
 
       if (middle > target.offsetLeft + targetEl.scrollLeft) {
