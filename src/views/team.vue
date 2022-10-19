@@ -84,7 +84,7 @@
                     <div class="hv-img"><img :src="$imgUrl + item.profile" :alt="item.name" @error="onLoadError"></div>
                   </figure>
                   <div class="text">
-                    <strong class="jobs ">{{item.pro_name}}</strong><br>
+                    <strong class="jobs ">{{lang === 'MN' ? item.pro_name : item.pro_name_ko}}</strong><br>
                     <span class="name">{{item.name}}</span>
                   </div>
                 </div>
@@ -97,7 +97,7 @@
                     <div class="hv-img"><img :src="$imgUrl + item.profile" :alt="item.name" @error="onLoadError"></div>
                   </figure>
                   <div class="text">
-                    <strong class="jobs ">{{item.pro_name}}</strong><br>
+                    <strong class="jobs ">{{lang === 'MN' ? item.pro_name : item.pro_name_ko}}</strong><br>
                     <span class="name">{{item.name}}</span>
                   </div>
                 </div>
@@ -110,7 +110,7 @@
                     <div class="hv-img"><img :src="$imgUrl + item.profile" :alt="item.name" @error="onLoadError"></div>
                   </figure>
                   <div class="text">
-                    <strong class="jobs ">{{item.pro_name}}</strong><br>
+                    <strong class="jobs ">{{lang === 'MN' ? item.pro_name : item.pro_name_ko}}</strong><br>
                     <span class="name">{{item.name}}</span>
                   </div>
                 </div>
@@ -123,7 +123,7 @@
                     <div class="hv-img"><img :src="$imgUrl + item.profile" :alt="item.name" @error="onLoadError"></div>
                   </figure>
                   <div class="text">
-                    <strong class="jobs ">{{item.pro_name}}</strong><br>
+                    <strong class="jobs ">{{lang === 'MN' ? item.pro_name : item.pro_name_ko}}</strong><br>
                     <span class="name">{{item.name}}</span>
                   </div>
                 </div>
@@ -137,7 +137,7 @@
                     <div class="hv-img"><img :src="$imgUrl + item.profile" :alt="item.name" @error="onLoadError"></div>
                   </figure>
                   <div class="text">
-                    <strong class="jobs ">{{item.pro_name}}</strong><br>
+                    <strong class="jobs ">{{lang === 'MN' ? item.pro_name : item.pro_name_ko}}</strong><br>
                     <span class="name">{{item.name}}</span>
                   </div>
                 </div>
@@ -184,11 +184,19 @@ export default {
       selectedTeam: {
         idx: 0,
         label: 'All'
-      }
+      },
+      lang: null
     }
   },
   mounted() {},
   created() {
+    const lan = localStorage.getItem('lang');
+    if (lan) {
+      this.lang = lan;
+    } else {
+      this.lang = 'MN';
+    }
+
     this.getEmployee();
     this.getTeams();
   },
