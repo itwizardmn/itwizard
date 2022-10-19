@@ -809,7 +809,8 @@ export default {
         personal : false,
         skill    : false,
         vote     : false
-      }
+      },
+      language: null
     }
   },
   computed: {
@@ -822,6 +823,12 @@ export default {
     }
   },
   created() {
+    const lan = localStorage.getItem('lang');
+    if (lan) {
+      this.language = lan;
+    } else {
+      this.language = 'MN'
+    }
     const user = JSON.parse(localStorage.getItem('employee'));
     this.user = user ? user : null; 
     this.getInfo();
@@ -880,7 +887,7 @@ export default {
     getProName() {
       let name = 'Unknown';
       this.profession.forEach(elm => {
-        elm.seq === this.user.pro_seq ? name = elm.pro_name : null;
+        elm.seq === this.user.pro_seq ? name = (this.language === 'MN' ? elm.pro_name : elm.pro_name_ko) : null;
       });
 
       return name;

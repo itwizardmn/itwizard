@@ -7,7 +7,7 @@
           <div class="swiper-slide">
             <div class="word">
               <!-- <p class="container">We are<br>Wizards</p> -->
-              <p class="container">WE ARE<br>IT WIZARDS</p>
+              <p class="container" ref="mainTitle">WE ARE<br>IT WIZARDS</p>
             </div>
             <video autoplay muted loop>
               <source src="@/assets/video/video.mp4">
@@ -138,6 +138,7 @@ export default {
     this.getBlogs();
   },
   mounted() {
+    // this.$gsap.fromTo(this.$refs.mainTitle, {x: -250, opacity: 0}, {opacity: 1, x: 0, duration: 1})
     this.initSwiper();
     this.getTeams();
     this.getProjects();
