@@ -158,14 +158,14 @@ export default {
       this.language = await this.$detectip();
     }
 
-    const banner = localStorage.getItem('hidden-main-banner');
-    if (!banner) {
-      this.dialog.banner = true;
-    } else {
-      if (this.getDate() > banner) {
-        this.dialog.banner = true;
-      }
-    }
+    // const banner = localStorage.getItem('hidden-main-banner');
+    // if (!banner) {
+    //   this.dialog.banner = true;
+    // } else {
+    //   if (this.getDate() > banner) {
+    //     this.dialog.banner = true;
+    //   }
+    // }
   },
   mounted() {
     this.checkRoute();
