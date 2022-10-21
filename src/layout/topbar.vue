@@ -95,6 +95,21 @@
       </div>
     </el-drawer>
 
+    <div class="main-banner" v-bind:class="{'open': dialog.banner}">
+      <div class="main-banner_header">
+        <a href="javascript:;" class="close" @click="hideBanner">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
+        </a>
+      </div>
+
+      <div class="main-banner_body">
+        <img src="@/assets/image/content/gallery/banner.jpg" alt="">
+      </div>
+      <div class="main-banner_footer">
+        <el-checkbox v-model="checkbox.banner">{{this.$textApi('hideBanner')}}</el-checkbox>
+      </div>
+    </div>
+
 
     <router-view @profileChanged="nameChnged"/>
     <Footer/>
@@ -115,6 +130,9 @@ export default {
   data() {
     return {
       user: null,
+      dialog: {
+        banner: false
+      },
       drop: {
         language: false,
         user: false
@@ -122,6 +140,9 @@ export default {
       language: null,
       mobile: {
         menu: false
+      },
+      checkbox: {
+        banner: false
       }
     }
   },
@@ -136,6 +157,15 @@ export default {
     } else {
       this.language = await this.$detectip();
     }
+
+    const banner = localStorage.getItem('hidden-main-banner');
+    if (!banner) {
+      this.dialog.banner = true;
+    } else {
+      if (this.getDate() > banner) {
+        this.dialog.banner = true;
+      }
+    }
   },
   mounted() {
     this.checkRoute();
@@ -144,6 +174,17 @@ export default {
     Event.$on('memberLogged', this.memberLogged);
   },
   methods: {
+    getDate() {
+      const dt = new Date();
+      return dt.getFullYear() + '-' + ((dt.getMonth() + 1) > 9 ? (dt.getMonth() + 1) : '0' + (dt.getMonth() + 1)) + '-' + (dt.getDate() > 9 ? dt.getDate() : '0' + dt.getDate())
+    },
+    hideBanner() {
+      if (this.checkbox.banner) {
+        localStorage.setItem('hidden-main-banner', this.getDate());
+      }
+
+      this.dialog.banner = false;
+    },
     nameChnged(name) {
       if (this.user && this.user.name) {
         this.user.name = name;

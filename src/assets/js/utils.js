@@ -474,6 +474,10 @@
   aboutItwizard: {
     KR: 'ITWIZARD 소개',
     MN: 'ITWIZARD-ын тухай'
+  },
+  hideBanner: {
+    KR: '오늘하루 그만보기',
+    MN: 'Өнөөдөртөө нуух'
   }
 }
 
