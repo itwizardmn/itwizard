@@ -169,8 +169,12 @@ export default {
   },
   mounted() {
     this.checkRoute();
-    const user = JSON.parse(localStorage.getItem('employee'));
-    this.user = user ? user : null; 
+    const emp = localStorage.getItem('employee');
+    if (emp) {
+      const user = JSON.parse();
+      this.user = user ? user : null; 
+    }
+    
     Event.$on('memberLogged', this.memberLogged);
   },
   methods: {

@@ -3,14 +3,14 @@
   <div v-loading="pageLoader">
     <!-- background: #f6f6f6; -->
     <div class="products" style="width: 100%;">
-      <div class="group-flex motion-up" style="margin-top: 0px;">
+      <!-- <div class="group-flex motion-up" style="margin-top: 0px;">
           <table>
               <tr>
                   <td @click="scrollMenu" class="active" group-id="0">#All</td>
                   <td class="uppercase" v-for="(team, index) in teams" :key="index" @click="scrollMenu" :group-id="team.seq">#{{team.team_name}}</td>
               </tr>
           </table>
-      </div>
+      </div> -->
       <div class="portfolioSwipeContiner">
         <div ref="swiper" class="swiper portfolioSwipe main">
           <div class="swiper-wrapper" v-if="projectFilter.length > 0">
