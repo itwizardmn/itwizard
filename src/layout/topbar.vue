@@ -171,7 +171,7 @@ export default {
     this.checkRoute();
     const emp = localStorage.getItem('employee');
     if (emp) {
-      const user = JSON.parse();
+      const user = JSON.parse(emp);
       this.user = user ? user : null; 
     }
     
