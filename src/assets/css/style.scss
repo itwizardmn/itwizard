@@ -29,6 +29,116 @@ body::-webkit-scrollbar-thumb {
     max-width: 85%;
     width: 85%;
   }
+
+  &.portfolio-menu {
+    margin: 20px auto;
+    display: flex;
+    justify-content: flex-end;
+  
+    .item {
+      @include vw-convert-desktop(width, 30px);
+      height: auto;
+      cursor: pointer;
+      @include vw-convert-desktop(margin-left, 5px);
+  
+      &.active {
+        img {
+          border: 1px solid black;
+          // border-radius: 5px;
+        }
+      }
+  
+      img {
+        width: 100%;
+        height: auto;
+        filter: grayscale(1);
+      }
+  
+      @include mobile {
+        @include vw-convert-mobile(width, 40px);
+        @include vw-convert-mobile(margin-left, 5px);
+      }
+    }
+  }
+
+  &.grid {
+    margin: 0px auto;
+    height: 80%;
+    padding: 0 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    gap: 20px;
+
+    @include mobile {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: none; 
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #000;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #000; 
+    }
+
+    .img-container {
+      position: relative;
+
+      .title{
+        @include vw-convert-desktop(font-size, 18px);
+        font-weight: 700;
+        @include vw-convert-desktop(padding-left, 10px);
+        transform: translateY(-30%);
+        text-transform: uppercase;
+
+        @include mobile {
+          @include vw-convert-mobile(font-size, 18px);
+          @include vw-convert-mobile(padding-left, 10px);
+        }
+      }
+
+      .link {
+        display: flex;
+        flex-direction: row;
+        transform: translateY(-50%);
+        @include vw-convert-desktop(padding-left, 10px);
+
+        @include mobile {
+          @include vw-convert-mobile(padding-left, 10px);
+        }
+
+        a {
+          background-color: #000;
+          text-decoration: none;
+          color: #fff;
+          @include vw-convert-desktop(font-size, 15px);
+          font-weight: 700;
+          @include vw-convert-desktop(padding, 5px 10px);
+
+          @include mobile {
+            @include vw-convert-mobile(font-size, 20px);
+            @include vw-convert-mobile(padding, 5px 10px);
+          }
+        }
+      }
+    }
+
+    .image {
+      width: 100%;
+      height: auto;
+      border: 1px solid #b3b3b3;
+    }
+  }
 }
 
 .keyVisual {
@@ -531,6 +641,7 @@ body::-webkit-scrollbar-thumb {
           width: 100%; 
           height: 100%; 
           object-fit: cover;
+          border: 1px solid #b3b3b3;
         }
 
         .title{
