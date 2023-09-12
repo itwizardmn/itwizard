@@ -482,13 +482,17 @@
 }
 
 
-const textApi = (text) => {
+const textApi = (text, lan = null) => {
   const lang = localStorage.getItem('lang');
   let language;
-  if (!lang) {
-    language = 'MN';
+  if (!lan) {
+    if (!lang) {
+      language = 'MN';
+    } else {
+      language = lang;
+    }
   } else {
-    language = lang;
+    language = lan;
   }
 
   if (obj[text] && obj[text][language]) {

@@ -90,8 +90,7 @@
             <el-collapse v-model="activeName" accordion>
               <el-collapse-item title="Mongolia" name="1">
                 <div class="">
-                  <div class="address">
-                    Монгол улс, Улаанбаатар хот, Баянгол дүүрэг, 2-р хороо, 2-р хороолол,<br>Сөүлийн гудамж, 47/1 байр
+                  <div class="address" v-html="$textApi('address', 'MN')">
                   </div>
                   <div class="phone">
                     <span>PHONE</span> +976 7511-0023<p><a style="color: #000;" href="mailto:admin@itwizard.mn">admin@itwizard.mn</a></p>
@@ -100,8 +99,7 @@
               </el-collapse-item>
               <el-collapse-item title="Republic of Korea" name="2">
                 <div class="">
-                  <div class="address">
-                    서울 금천구 가산디지털1로 5대륭테크노타운20차 402호
+                  <div class="address" v-html="$textApi('address', 'KR')">
                   </div>
                   <div class="phone">
                     <span>PHONE</span> +82 1644-5805
